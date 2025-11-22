@@ -6,4 +6,4 @@ University of Kelsinki course exercises
 
 ### Chapter 2
 
-- 1.1
+- [1.1](https://github.com/lc-2025/kubernetes/tree/1.1/log-output)

@@ -1,0 +1,6 @@
+services:
+  log-output:
+    build:
+      dockerfile: ./Dockerfile
+    container_name: log-output
+    image: thespeaker33/log-output

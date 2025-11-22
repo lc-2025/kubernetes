@@ -1,0 +1,16 @@
+{
+  "name": "log_output",
+  "version": "1.0.0",
+  "description": "Prints a random hash every 5 seconds",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lc-2025/kubernetes/log_output"
+  },
+  "author": "Luca Cattide",
+  "license": "UNLICENSED"
+}

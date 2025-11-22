@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Prints a random hash every 5 seconds",
   "main": "index.js",
+  "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"

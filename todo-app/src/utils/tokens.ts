@@ -1,6 +1,6 @@
 import 'dotenv/config';
 
-const { NODE_ENV, PORT,  } = process.env;
+const { NODE_ENV, PORT } = process.env;
 const EVENT = {
   ERROR: 'error',
 };

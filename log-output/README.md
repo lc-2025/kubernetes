@@ -21,11 +21,11 @@ On terminal, from project root:
 Build the image and run the container
 
 ```bash
-docker-compose up
+docker compose up
 ```
 
 Stop the container
 
 ```bash
-docker-compose stop
+docker compose stop
 ```

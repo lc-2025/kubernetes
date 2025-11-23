@@ -1,6 +1,6 @@
 # DevOps with Kubernetes
 
-University of Kelsinki course exercises
+University of Helsinki course exercises
 
 ## Exercises
 

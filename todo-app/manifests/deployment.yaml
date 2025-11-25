@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
         - name: todo-app
-          image: thespeaker33/todo-app
+          image: thespeaker33/todo-app:latest

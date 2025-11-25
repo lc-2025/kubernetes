@@ -4,6 +4,7 @@ import cors from 'cors';
 import express, { json } from 'express';
 import helmet from 'helmet';
 import middlewares from './middlewares';
+import path from 'path';
 import rateLimit from 'express-rate-limit';
 import router from './routes';
 import { Server } from 'http';
@@ -21,6 +22,7 @@ const { ssl, error } = middlewares;
 const app = express();
 
 app.set('port', PORT ?? PORT_DEFAULT);
+app.use(express.static(path.join(__dirname, '..', 'public')));
 app.use(
   bodyParser.json(),
   compression(),

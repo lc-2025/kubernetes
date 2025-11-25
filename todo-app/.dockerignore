@@ -1,0 +1,6 @@
+Dockerfile
+eslint.config.mts
+nodemon.json
+README.md
+!.env
+.*

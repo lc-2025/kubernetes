@@ -2,6 +2,10 @@
 
 A TODO manager web application.
 
+## API Documentation
+
+TODO:
+
 ## Getting started
 
 On terminal, from project root:

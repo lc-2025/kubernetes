@@ -1,5 +1,7 @@
 Dockerfile
+docker-compose.yaml
 eslint.config.mts
+manifests
 nodemon.json
 README.md
 !.env

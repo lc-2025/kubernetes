@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: hashresponse-svc
 spec:
-  type: NodePort
+  type: NodePort # Assign a port to a service - Normally not used in production
   selector:
     app: hashresponse # This is the app as declared in the deployment.
   ports:

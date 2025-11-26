@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hashresponse-svc
+spec:
+  type: ClusterIP # Gives the Service an internal IP accessible within the cluster
+  selector:
+    app: hashresponse-dep # Naming reflects deployment's one
+  ports:
+    - port: 2345
+      protocol: TCP
+      targetPort: 3000

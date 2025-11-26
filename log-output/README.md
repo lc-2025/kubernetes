@@ -2,11 +2,47 @@
 
 Prints a random hash every 5 seconds.
 
+## API Documentation (REST)
+
+- Root
+  - Endpoint: `/`
+  - Response: `200`
+  - Description: Verifies the application status
+
+- Status
+  - Endpoint: `/api/status`
+  - Response: `200`
+  - Description: Verifies the service status
+
 ## Getting started
 
 On terminal, from project root:
 
-- To run the script
+- To install dependencies
+
+```bash
+  npm i
+```
+
+- To lint the sources
+
+```bash
+  npm run lint
+```
+
+- To run in `development` mode
+
+```bash
+  npm run dev
+```
+
+- To build the production version
+
+```bash
+  npm run build
+```
+
+- To run in `production` mode
 
 ```bash
   npm run start

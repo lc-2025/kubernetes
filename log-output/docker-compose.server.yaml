@@ -1,0 +1,8 @@
+services:
+  log-output:
+    build:
+      dockerfile: ./Dockerfile.server
+    container_name: log-output
+    image: thespeaker33/log-output
+    ports:
+      - ${PORT}:${PORT}

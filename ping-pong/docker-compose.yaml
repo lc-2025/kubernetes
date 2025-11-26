@@ -1,0 +1,8 @@
+services:
+  ping-pong:
+    build:
+      dockerfile: ./Dockerfile
+    container_name: ping-pong
+    image: thespeaker33/ping-pong
+    ports:
+      - ${PORT}:${PORT}

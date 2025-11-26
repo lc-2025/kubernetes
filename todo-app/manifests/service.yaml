@@ -10,5 +10,5 @@ spec:
     - name: http
       nodePort: 32400 # This is the port that is available outside. Value for nodePort can be between 30000-32767
       protocol: TCP
-      port: 4321 # This is a port that is available to the cluster, in this case it can be ~ anything
+      port: 3210 # This is a port that is available to the cluster, in this case it can be ~ anything
       targetPort: 4000 # This is the target port

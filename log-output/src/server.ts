@@ -6,7 +6,7 @@ import helmet from 'helmet';
 import middlewares from './middlewares';
 import rateLimit from 'express-rate-limit';
 import router from './routes';
-import { saveHash } from '.';
+import { saveHash } from './services/hash';
 import { Server } from 'http';
 import {
   HOST,

@@ -12,7 +12,7 @@ const HOST = '0.0.0.0';
 const MESSAGE = {
   LISTEN: 'Server started in port',
 };
-const PATH_SAVE = `/usr/src/app/${FILE_HASH}`;
+const PATH_SAVE = `/usr/src/app/files/${FILE_HASH}`;
 const PORT_DEFAULT = 4000;
 const PROTOCOL = {
   HTTPS: 'https',

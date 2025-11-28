@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: log-output
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: log-output
+  template:
+    metadata:
+      labels:
+        app: log-output
+    spec:
+      volumes:
+        - name: log-output
+          emptyDir: {}
+      containers:
+        - name: log-output-setter
+          image: thespeaker33/log-output:latest
+          volumeMounts:
+          - name: log-output
+            mountPath: /usr/src/app/files
+        - name: log-output-getter
+          image: thespeaker33/log-output:latest
+          volumeMounts:
+          - name: log-output
+            mountPath: /usr/src/app/files

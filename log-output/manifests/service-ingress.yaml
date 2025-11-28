@@ -12,4 +12,4 @@ spec:
           service:
             name: log-output
             port:
-              number: 4321
+              number: 5000

@@ -9,13 +9,13 @@ spec:
   rules:
   - http:
       paths:
-      - path: /status
+      - path: /api/status
         pathType: Prefix
         backend:
           service:
             name: log-output
             port:
-              number: 4321
+              number: 5000
   - http:
       paths:
       - path: /pingpong
@@ -24,4 +24,4 @@ spec:
           service:
             name: ping-pong
             port:
-              number: 5432
+              number: 6000

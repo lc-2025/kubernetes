@@ -7,6 +7,6 @@ spec:
   selector:
     app: log-output
   ports:
-    - port: 4321
+    - port: 5000
       protocol: TCP
       targetPort: 5000

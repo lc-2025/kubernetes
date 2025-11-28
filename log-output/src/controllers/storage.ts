@@ -7,15 +7,15 @@ const getStorage = async (request: Request, response: Response, next: NextFuncti
   const readStream = fs.createReadStream(path.join(process.cwd(), FILE_HASH), { encoding: 'utf8' });
 
   try {
+    let chunks = '';
+
     for await (const chunk of readStream) {
-      console.log('--- File chunk start ---');
-      console.log(chunk);
-      console.log('--- File chunk end ---');
+      chunks += `<pre>${chunk}</pre>`;
     }
 
-    console.log('Finished reading the file.');
+    response.send(chunks);
   } catch(error) {
-    next(error)
+    next(error);
   }
 }
 

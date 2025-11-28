@@ -16,7 +16,7 @@ const saveHash = async (): Promise<void> => {
 
       console.log(hash);
 
-      await fs.appendFile(`./${FILE_HASH}` /*PATH_SAVE */, `${hash}\n`);
+      await fs.appendFile(PATH_SAVE, `${hash}\n`);
     }, 5000);
   } catch (error) {
     console.error(error);

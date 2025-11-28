@@ -6,6 +6,7 @@ import helmet from 'helmet';
 import middlewares from './middlewares';
 import rateLimit from 'express-rate-limit';
 import router from './routes';
+import { saveHash } from '.';
 import { Server } from 'http';
 import {
   HOST,
@@ -55,5 +56,7 @@ const startServer = async (): Promise<Server> => {
 };
 
 const server = startServer();
+
+saveHash();
 
 export default server;

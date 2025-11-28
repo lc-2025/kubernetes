@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises';
 import { printHashOnce } from './services/hash';
-import {PATH_SAVE} from './utils/tokens';
+import {FILE_HASH, PATH_SAVE} from './utils/tokens';
 
 /**
  * @description Hash setter
@@ -11,12 +11,12 @@ import {PATH_SAVE} from './utils/tokens';
  */
 const saveHash = async (): Promise<void> => {
   try {
-    const hash = printHashOnce();
-
     setInterval(async () => {
+      const hash = printHashOnce();
+
       console.log(hash);
 
-      await fs.appendFile('./test.txt', `${hash}\n`);
+      await fs.appendFile(`./${FILE_HASH}` /*PATH_SAVE */, `${hash}\n`);
     }, 5000);
   } catch (error) {
     console.error(error);

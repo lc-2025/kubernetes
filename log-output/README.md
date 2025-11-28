@@ -14,6 +14,11 @@ Prints a random hash every 5 seconds.
   - Response: `200`
   - Description: Verifies the service status
 
+- Storage
+  - Endpoint: `/api/storage`
+  - Response: `200`
+  - Description: Retrieves the saved hashes
+
 ## Getting started
 
 On terminal, from project root:

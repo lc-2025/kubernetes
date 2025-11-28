@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import routerStatus from './status';
+import routerStorage from './storage';
 import { ROUTES } from '../utils/tokens';
 
 const { API, BASE_PATHNAME } = ROUTES;
@@ -15,5 +16,6 @@ router.get(BASE_PATHNAME, (req, res) => {
 });
 // API - REST
 router.use(API.BASE_PATHNAME, routerStatus);
+router.use(API.BASE_PATHNAME, routerStorage);
 
 export default router;

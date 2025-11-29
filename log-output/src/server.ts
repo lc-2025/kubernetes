@@ -15,6 +15,7 @@ import {
   RATE_LIMIT,
   EVENT,
   MESSAGE,
+  SERVER,
 } from './utils/tokens';
 
 const { WINDOW, MAX_REQUESTS } = RATE_LIMIT;
@@ -55,8 +56,12 @@ const startServer = async (): Promise<Server> => {
   return server;
 };
 
-const server = startServer();
+let server = null;
 
-saveHash();
+if (SERVER === 'true') {
+  server = startServer();
+} else {
+  saveHash();
+}
 
 export default server;

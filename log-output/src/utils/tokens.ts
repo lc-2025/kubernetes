@@ -1,6 +1,7 @@
 import 'dotenv/config';
 
 const { NODE_ENV, PORT } = process.env;
+const SERVER = process.env.SERVER || 'false';
 const EVENT = {
   ERROR: 'error',
 };
@@ -44,4 +45,5 @@ export {
   PROTOCOL,
   RATE_LIMIT,
   ROUTES,
+  SERVER,
 };

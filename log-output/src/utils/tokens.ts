@@ -15,6 +15,7 @@ const MESSAGE = {
   LISTEN: 'Server started in port',
 };
 const PATH_SAVE = path.join(process.cwd(), `files/${FILE_HASH}`);
+const PATH_SAVE_COUNT = path.join(process.cwd(), 'files/count.txt');
 const PORT_DEFAULT = 4000;
 const PROTOCOL = {
   HTTPS: 'https',
@@ -41,6 +42,7 @@ export {
   MESSAGE,
   NODE_ENV,
   PATH_SAVE,
+  PATH_SAVE_COUNT,
   PORT,
   PORT_DEFAULT,
   PROTOCOL,

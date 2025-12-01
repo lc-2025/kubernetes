@@ -1,4 +1,5 @@
 import 'dotenv/config';
+import path from 'node:path';
 
 const { NODE_ENV, PORT } = process.env;
 const EVENT = {
@@ -11,6 +12,7 @@ const HOST = '0.0.0.0';
 const MESSAGE = {
   LISTEN: 'Server started in port',
 };
+const PATH_SAVE = path.join(process.cwd(), 'files/count.txt');
 const PORT_DEFAULT = 4000;
 const PROTOCOL = {
   HTTPS: 'https',
@@ -33,6 +35,7 @@ export {
   HOST,
   MESSAGE,
   NODE_ENV,
+  PATH_SAVE,
   PORT,
   PORT_DEFAULT,
   PROTOCOL,

@@ -1,0 +1,9 @@
+footer {
+  margin: 2rem 0 0;
+}
+
+.wrapper__image {
+  height: auto;
+  max-width: 38%;
+  width: 100%;
+}

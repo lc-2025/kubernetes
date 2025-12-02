@@ -24,4 +24,4 @@ spec:
           service:
             name: ping-pong
             port:
-              number: 6000
+              number: 5070

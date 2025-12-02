@@ -4,7 +4,7 @@ COPY package* .
 RUN npm i
 FROM setup AS build
 COPY . .
-ENV PORT=5060
+ENV PORT=5070
 RUN npm run build
 FROM build
 EXPOSE $PORT

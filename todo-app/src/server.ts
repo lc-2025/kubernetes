@@ -27,7 +27,14 @@ app.use(
   bodyParser.json(),
   compression(),
   cors(),
-  helmet(),
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        'connect-src': ["'self'", 'picsum.photos', 'fastly.picsum.photos'],
+        'img-src': ["'self'", 'picsum.photos', 'fastly.picsum.photos'],
+      },
+    },
+  }),
   json(),
   rateLimit({
     windowMs: WINDOW,

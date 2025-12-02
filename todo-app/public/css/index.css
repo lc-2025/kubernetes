@@ -1,3 +1,7 @@
+.form__label {
+  display: none;
+}
+
 footer {
   margin: 2rem 0 0;
 }

@@ -12,10 +12,21 @@
     <main class="wrapper">
       <h1 class="wrapper__title">The project App</h1>
       <img class="wrapper__image" src="" alt="Last picture" />
+      <form class="wrapper__form">
+        <label aria-label="TODO" class="form__label" for="todo">TODO</label>
+        <input aria-required="true" class="form__input"  id="todo" type="text" maxlength="140" required/>
+        <input class="form__input"  type="submit" value="Create todo" />
+      </form>
+      <ul class="wrapper__list">
+        <li class="list__item">Learn JavaScript</li>
+        <li class="list__item">Learn React</li>
+        <li class="list__item">Build a project</li>
+      </ul>
     </main>
     <footer class="footer">
       DevOps with Kubernetes 2025
     </footer>
     <script src="js/picture.js" defer></script>
+    <script src="js/form.js" defer></script>
   </body>
 </html>

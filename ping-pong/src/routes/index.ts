@@ -1,4 +1,4 @@
-import { getPingPong } from '../controllers/pingPong';
+import { getPingPong, getPings } from '../controllers/pingPong';
 import { Router } from 'express';
 import { ROUTES } from '../utils/tokens';
 
@@ -8,8 +8,7 @@ const router = Router();
 router.get(BASE_PATHNAME, (req, res) => {
   res.sendStatus(200);
 });
-// API - REST
 router.get(API.PING_PONG, getPingPong);
-
+router.get(API.PINGS, getPings);
 
 export default router;

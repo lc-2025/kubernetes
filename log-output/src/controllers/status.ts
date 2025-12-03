@@ -1,18 +1,28 @@
-import {NextFunction, Request, Response} from 'express';
-import {printHashOnce} from '../services/hash';
+import axios from 'axios';
+import { NextFunction, Request, Response } from 'express';
+import { printHashOnce } from '../services/hash';
+import { ERROR, PORT_EXTERNAL, ROUTES } from '../utils/tokens';
 
 /**
- * @description Status getter
- * Returns a single hash
+ * @description
  * @author Luca Cattide
- * @date 26/11/2025
+ * @date 03/12/2025
  * @param {Request} request
  * @param {Response} response
  * @param {NextFunction} next
+ * @returns {*}  {Promise<void>}
  */
-const getStatus = (request: Request, response: Response, next: NextFunction): void => {
+const getStatus = async (request: Request, response: Response, next: NextFunction): Promise<void> => {
+  const { API, BASE_URL } = ROUTES;
+
   try {
-    response.send(printHashOnce());
+    const pings = await axios.get(`${BASE_URL}:${PORT_EXTERNAL}${API.PINGS}`);
+
+    if (!pings) {
+      throw new Error(ERROR.FETCH);
+    }
+
+    response.send(`<pre>${printHashOnce()}<br />${`Ping / Pongs: ${pings.data}`}</pre>`);
   } catch (error) {
     next(error);
   }

@@ -16,6 +16,7 @@ import {
   EVENT,
   MESSAGE,
   SERVER,
+  CSP,
 } from './utils/tokens';
 
 const { WINDOW, MAX_REQUESTS } = RATE_LIMIT;
@@ -27,7 +28,11 @@ app.use(
   bodyParser.json(),
   compression(),
   cors(),
-  helmet(),
+  helmet({
+    contentSecurityPolicy: {
+      directives: CSP
+    }
+  }),
   json(),
   rateLimit({
     windowMs: WINDOW,

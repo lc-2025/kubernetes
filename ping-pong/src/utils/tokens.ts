@@ -23,7 +23,8 @@ const RATE_LIMIT = {
 };
 const ROUTES = {
   API: {
-    PING_PONG: '/pingpong'
+    PING_PONG: '/pingpong',
+    PINGS: '/pings',
   },
   BASE_PATHNAME: '/',
   BASE_URL: 'http://localhost',

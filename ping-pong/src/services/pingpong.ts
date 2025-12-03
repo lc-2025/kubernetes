@@ -6,10 +6,10 @@ let counter = 0;
  * @date 26/11/2025
  * @returns {*}  {string}
  */
-const getPingPongCount = (): string => {
+const getPingPongCount = (count?: boolean): number | string => {
   setPingPongCount();
 
-  return `pong ${counter}`;
+  return count ? counter : `pong ${counter}`;
 }
 
 /**

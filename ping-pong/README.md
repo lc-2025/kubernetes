@@ -7,11 +7,17 @@ Ping Pong web application.
 - Root
   - Endpoint: `/` (redirects to `/pingpong`)
   - Response: `200`
+  - Description: Verifies the service status
 
 - Status
   - Endpoint: `/pingpong`
   - Response: `200`
-  - Description: Verifies the service status
+  - Description: Returns the full output
+
+- Status
+  - Endpoint: `/pings`
+  - Response: `200`
+  - Description: Returns the amount of endpoint calls performed
 
 ## Getting started
 

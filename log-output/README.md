@@ -7,17 +7,7 @@ Prints a random hash every 5 seconds.
 - Root
   - Endpoint: `/`
   - Response: `200`
-  - Description: Verifies the application status
-
-- Status
-  - Endpoint: `/api/status`
-  - Response: `200`
-  - Description: Verifies the service status
-
-- Storage
-  - Endpoint: `/api/storage`
-  - Response: `200`
-  - Description: Retrieves the saved hashes
+  - Description: Returns the output including hash and endpoint calls
 
 ## Getting started
 

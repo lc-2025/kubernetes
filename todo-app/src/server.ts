@@ -1,14 +1,17 @@
 import bodyParser from 'body-parser';
 import compression from 'compression';
 import cors from 'cors';
-import express, { json } from 'express';
+import express, { json, urlencoded } from 'express';
+import hbs from 'hbs';
 import helmet from 'helmet';
 import middlewares from './middlewares';
 import path from 'path';
 import rateLimit from 'express-rate-limit';
 import router from './routes';
 import { Server } from 'http';
+import session from 'express-session';
 import {
+  CSP,
   HOST,
   PORT_DEFAULT,
   PORT,
@@ -22,23 +25,31 @@ const { ssl, error } = middlewares;
 const app = express();
 
 app.set('port', PORT ?? PORT_DEFAULT);
-app.use(express.static(path.join(__dirname, '..', 'public')));
+app.set('view engine', 'hbs');
+app.set('views', path.join(__dirname, 'views'));
 app.use(
   bodyParser.json(),
   compression(),
   cors(),
+  express.static(path.join(__dirname, '..', 'public')),
+  urlencoded({ extended: true }),
   helmet({
     contentSecurityPolicy: {
-      directives: {
-        'connect-src': ["'self'", 'picsum.photos', 'fastly.picsum.photos'],
-        'img-src': ["'self'", 'picsum.photos', 'fastly.picsum.photos'],
-      },
+      directives: CSP,
     },
   }),
   json(),
   rateLimit({
     windowMs: WINDOW,
     max: MAX_REQUESTS,
+  }),
+  session({
+    cookie: {
+      secure: false,
+    },
+    saveUninitialized: true,
+    secret: 'foo',
+    resave: false,
   }),
   router,
   ssl,

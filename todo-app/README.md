@@ -2,9 +2,17 @@
 
 A TODO manager web application.
 
-## API Documentation
+## API Documentation (REST)
 
-TODO:
+- `GET` todos
+  - Endpoint: `/todos`
+  - Response: `200` | `400` | `409`
+  - Description: Returns the current TODOs
+
+- `POST` todos
+  - Endpoint: `/todos`
+  - Response: `200` | `400` | `409`
+  - Description: Saves the new TODO
 
 ## Getting started
 

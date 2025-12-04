@@ -23,3 +23,4 @@ University of Helsinki course exercises
 ### Chapter 3
 
 - [2.1](https://github.com/lc-2025/kubernetes/tree/2.1/log-output)
+- [2.2](https://github.com/lc-2025/kubernetes/tree/2.2/todo-app)

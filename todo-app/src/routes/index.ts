@@ -1,11 +1,14 @@
-import path from 'path';
+import { getTodo, setTodo } from '../controllers/todo';
+import { PAGE, ROUTES } from '../utils/tokens';
 import { Router } from 'express';
-import { ROUTES } from '../utils/tokens';
 
+const { API, BASE_PATHNAME } = ROUTES;
 const router = Router();
 
-router.get(ROUTES.BASE_PATHNAME, (req, res) => {
-  res.status(200).sendFile(path.join(__dirname, '..', '..', 'public', 'html', 'index.html'));
+router.get(BASE_PATHNAME, (req, res) => {
+  res.render(PAGE.INDEX);
 });
+router.get(API.TODO, getTodo);
+router.post(API.TODO, setTodo)
 
 export default router;

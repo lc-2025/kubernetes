@@ -14,7 +14,7 @@ import {
   PORT,
   RATE_LIMIT,
   EVENT,
-  MESSAGE,
+  MESSAGE_SERVER,
   SERVER,
   CSP,
 } from './utils/tokens';
@@ -52,7 +52,7 @@ const startServer = async (): Promise<Server> => {
   const port = app.get('port');
   const server = app
     .listen(port, HOST, () => {
-      console.log(`${MESSAGE.LISTEN} ${port}`);
+      console.log(`${MESSAGE_SERVER.LISTEN} ${port}`);
     })
     .on(EVENT.ERROR, (error) => {
       throw error;

@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { NextFunction, Request, Response } from 'express';
 import { printHashOnce } from '../services/hash';
-import { ERROR, PORT_EXTERNAL, ROUTES } from '../utils/tokens';
+import { ERROR, MESSAGE, PATH_SAVE_CONF, PORT_EXTERNAL, ROUTES } from '../utils/tokens';
+import {readStream} from '../utils/utilities';
 
 /**
  * @description
@@ -22,7 +23,7 @@ const getStatus = async (request: Request, response: Response, next: NextFunctio
       throw new Error(ERROR.FETCH);
     }
 
-    response.send(`<pre>${printHashOnce()}<br />${`Ping / Pongs: ${pings.data}`}</pre>`);
+    response.send(`<pre>file content: ${readStream(PATH_SAVE_CONF)}<br />env variable: MESSAGE=${MESSAGE}<br />${printHashOnce()}<br />${`Ping / Pongs: ${pings.data}`}</pre>`);
   } catch (error) {
     next(error);
   }

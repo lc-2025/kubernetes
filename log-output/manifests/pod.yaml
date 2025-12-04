@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: log-output
+  namespace: exercises
+spec:
+  containers:
+    - name: log-output
+      image: thespeaker33/log-output
+      env:
+        # Define the environment variable
+        - name: MESSAGE # Notice that the case is different here from the key name in the ConfigMap.
+          valueFrom:
+            configMapKeyRef:
+              name: log-output # The ConfigMap this value comes from.
+              key: message # The key to fetch.
+      volumeMounts:
+      - name: log-output
+        mountPath: "/usr/src/app/files"
+        readOnly: true
+  volumes:
+  # You set volumes at the Pod level, then mount them into containers inside that Pod
+  - name: log-output
+    configMap:
+      # Provide the name of the ConfigMap you want to mount.
+      name: log-output
+      # An array of keys from the ConfigMap to create as files
+      items:
+      - key: "information.txt"
+        path: "information.txt"

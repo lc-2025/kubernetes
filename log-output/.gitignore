@@ -1,5 +1,5 @@
 dist
-files
+files/hash.txt
 node_modules
 .env
 .hash

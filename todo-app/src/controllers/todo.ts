@@ -39,7 +39,7 @@ const setTodo = (request: Request, response: Response): void => {
   ];
 
   (request.session as any).todos = todos;
-  response.redirect(ROUTES.API.TODO);
+  response.redirect(ROUTES.API.TODO!);
 }
 
 export { getTodo, setTodo };

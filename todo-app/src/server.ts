@@ -64,7 +64,7 @@ app.use(
 const startServer = async (): Promise<Server> => {
   const port = app.get('port');
   const server = app
-    .listen(port, HOST, () => {
+    .listen(port, HOST!, () => {
       console.log(`${MESSAGE.LISTEN} ${port}`);
     })
     .on(EVENT.ERROR, (error) => {

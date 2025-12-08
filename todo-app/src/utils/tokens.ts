@@ -1,6 +1,6 @@
 import 'dotenv/config';
 
-const { NODE_ENV, PORT } = process.env;
+const { API_TODO, BASE_PATHNAME, BASE_URL, HOST, MAX_REQUEST, NODE_ENV, PORT, WINDOW } = process.env;
 const CSP = {
   'connect-src': ["'self'", 'picsum.photos', 'fastly.picsum.photos'],
   'img-src': ["'self'", 'picsum.photos', 'fastly.picsum.photos'],
@@ -15,7 +15,6 @@ const EVENT = {
 const HEADER = {
   XFP: 'x-forwarded-proto',
 };
-const HOST = '0.0.0.0';
 const MESSAGE = {
   LISTEN: 'Server started in port',
 };
@@ -27,15 +26,15 @@ const PROTOCOL = {
   HTTPS: 'https',
 };
 const RATE_LIMIT = {
-  MAX_REQUESTS: 100,
-  WINDOW: 15 * 60 * 1000,
+  MAX_REQUESTS: parseInt(MAX_REQUEST!, 10),
+  WINDOW: parseInt(WINDOW!, 10),
 };
 const ROUTES = {
   API: {
-    TODO:'/todos',
+    TODO: API_TODO,
   },
-  BASE_PATHNAME: '/',
-  BASE_URL: 'http://localhost',
+  BASE_PATHNAME,
+  BASE_URL,
 };
 
 export {

@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: todo-app
+  namespace: exercises
+spec:
+  containers:
+    - name: todo-app
+      image: thespeaker33/todo-app
+      env:
+        - name: CONFIGURATION
+          valueFrom:
+            configMapKeyRef:
+              name: todo-app
+              key: configuration
+      volumeMounts:
+      - name: todo-app
+        mountPath: "/usr/src/app/files"
+        readOnly: true
+  volumes:
+  - name: todo-app
+    configMap:
+      name: todo-app
+      items:
+      - key: "configuration"
+        path: "configuration"

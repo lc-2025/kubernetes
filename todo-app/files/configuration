@@ -1,0 +1,6 @@
+API_TODO=/todos
+BASE_PATHNAME=/
+BASE_URL=http://localhost
+HOST=0.0.0.0
+MAX_REQUESTS=100
+WINDOW="15 * 60 * 1000"

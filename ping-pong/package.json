@@ -9,7 +9,8 @@
     "lint": "eslint . && prettier --write . && prettier --check .",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc --project ./tsconfig.json",
-    "start": "NODE_ENV=production node ./dist/server.js",
+    "seed": "node ./dist/seed.js",
+    "start": "node ./dist/seed.js && NODE_ENV=production node ./dist/server.js",
     "prepare": "husky"
   },
   "repository": {
@@ -26,7 +27,9 @@
     "express": "^5.1.0",
     "express-rate-limit": "^8.2.1",
     "helmet": "^8.1.0",
-    "joi": "^18.0.2"
+    "joi": "^18.0.2",
+    "pg": "^8.16.3",
+    "pg-cursor": "^2.15.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
@@ -35,6 +38,8 @@
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.5",
     "@types/node": "^24.10.1",
+    "@types/pg": "^8.15.6",
+    "@types/pg-cursor": "^2.7.2",
     "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",
     "globals": "^16.5.0",

@@ -4,15 +4,20 @@ COPY package* .
 RUN npm i
 FROM setup AS build
 COPY . .
-ARG DATABASE_URL
-ENV DATABASE_URL=${DATABASE_URL}
-ENV PORT=4000
+ENV DATABASE_URL="" \
+  API_TODO="" \
+  BASE_PATHNAME="" \
+  BASE_URL="" \
+  HOST="" \
+  WINDOW="" \
+  WIKI_RANDOM="" \
+  PORT=4000
 RUN npm run build
 FROM build
 EXPOSE $PORT
 RUN adduser -D appuser \
   && mkdir -p /etc/sudoers.d \
-  && echo "appuseer ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/appuser \
+  && echo "appuser ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/appuser \
   && chmod 0440 /etc/sudoers.d/appuser
 USER appuser
 CMD ["npm", "run", "start"]

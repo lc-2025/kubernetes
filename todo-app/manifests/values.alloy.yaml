@@ -1,0 +1,8 @@
+deployment:
+  # Tailare local log like Promtail
+  mode: daemonset
+clusterRole:
+  # RBAC on Kubernetes API
+  create: true
+serviceAccount:
+  create: true

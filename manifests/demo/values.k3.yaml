@@ -1,0 +1,66 @@
+# Helm chart values override for Loki on K3s
+deploymentMode: SingleBinary
+
+loki:
+  commonConfig:
+    replication_factor: 1
+  storage:
+    type: local
+    local:
+      directory: /var/loki/chunks
+  schemaConfig:
+    configs:
+      - from: "2024-04-01"
+        store: tsdb
+        object_store: filesystem # More lighten than S3
+        schema: v13
+        index:
+          prefix: loki_index_
+          period: 24h
+  auth_enabled: false
+
+singleBinary:
+  replicas: 1
+  persistence:
+    enabled: true
+    # Reduced PVC
+    size: 10Gi
+  resources:
+    requests:
+      cpu: 250m
+      memory: 512Mi
+    limits:
+      cpu: 1000m
+      memory: 1024Mi
+
+# Unwanted resources consumers
+gateway:
+  enabled: true
+  service:
+    type: LoadBalancer
+
+read:
+  enabled: false
+  replicas: 0
+write:
+  enabled: false
+  replicas: 0
+backend:
+  enabled: false
+  replicas: 0
+
+# Not necessary with filesystem
+minio:
+  enabled: false
+
+memcached:
+  enabled: false
+
+monitoring:
+  selfMonitoring:
+    enabled: false
+  serviceMonitor:
+    enabled: false
+
+test:
+  enabled: false

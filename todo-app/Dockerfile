@@ -4,6 +4,8 @@ COPY package* .
 RUN npm i
 FROM setup AS build
 COPY . .
+ARG DATABASE_URL
+ENV DATABASE_URL=${DATABASE_URL}
 ENV PORT=4000
 RUN npm run build
 FROM build

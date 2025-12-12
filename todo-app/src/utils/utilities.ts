@@ -11,7 +11,7 @@ import {ERROR} from './tokens';
  */
 const validate = (request: Request, response: Response): void => {
   const schema = Joi.object({
-    todo: Joi.string().alphanum().required(),
+    todo: Joi.alternatives().try(Joi.string().alphanum(), Joi.string().uri()).required(),
   });
   const { error } = schema.validate({
     ...request.body,

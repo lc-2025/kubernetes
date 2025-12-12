@@ -1,7 +1,7 @@
-import { ERROR, PAGE, ROUTES } from '../utils/tokens';
+import { ERROR, PAGE, ROUTES, WIKI_RANDOM } from '../utils/tokens';
 import { Request, Response } from 'express';
 import { validate } from '../utils/utilities';
-import {getTodos, setTodo} from '../services/todo';
+import { getTodos, setTodo, setTodoRandom } from '../services/todo';
 
 const { INDEX } = PAGE;
 
@@ -33,7 +33,13 @@ const setTodos = async (request: Request, response: Response): Promise<void> => 
 
   validate(request, response);
 
-  await setTodo(request.body.todo);
+  let { todo } = request.body;
+
+  if (todo === WIKI_RANDOM) {
+    await setTodoRandom();
+  } else {
+    await setTodo(request.body.todo);
+  }
 
   const todos = await getTodos();
 

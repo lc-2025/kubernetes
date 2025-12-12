@@ -48,4 +48,21 @@ const setTodo = async (todo: string): Promise<void> => {
   }
 }
 
-export { getTodos, setTodo };
+const setTodoRandom = async (): Promise<void> => {
+  try {
+    const response = await fetch(process.env.WIKI_RANDOM!);
+
+    if (!response.ok) {
+      throw new Error(ERROR.FETCH);
+    }
+
+    const data = response.url;
+
+    await setTodo(`Read ${data}`);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+
+export { getTodos, setTodo, setTodoRandom };

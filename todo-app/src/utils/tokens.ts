@@ -1,6 +1,6 @@
 import 'dotenv/config';
 
-const { API_TODO, BASE_PATHNAME, BASE_URL, HOST, MAX_REQUEST, NODE_ENV, PORT, WINDOW } = process.env;
+const { API_TODO, BASE_PATHNAME, BASE_URL, HOST, MAX_REQUEST, NODE_ENV, PORT, WINDOW, WIKI_RANDOM } = process.env;
 const CSP = {
   'connect-src': ["'self'", 'picsum.photos', 'fastly.picsum.photos'],
   'img-src': ["'self'", 'picsum.photos', 'fastly.picsum.photos'],
@@ -8,6 +8,7 @@ const CSP = {
 const ERROR = {
   CLIENT: 'A client has been checked out for more than 5 seconds!',
   EMPTY: 'No results',
+  FETCH: 'Fetch error:',
   INPUT_INVALID: 'Invalid input',
   INPUT_MISSING: 'Missing input',
   POOL: 'Unexpected error on idle client',
@@ -88,4 +89,5 @@ export {
   SEED,
   SIGNAL,
   TRANSACTION,
+  WIKI_RANDOM,
 };

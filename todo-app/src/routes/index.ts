@@ -1,4 +1,4 @@
-import { getTodo, setTodo } from '../controllers/todo';
+import { getTodoRecords, setTodos } from '../controllers/todo';
 import { PAGE, ROUTES } from '../utils/tokens';
 import { Router } from 'express';
 
@@ -8,7 +8,7 @@ const router = Router();
 router.get(BASE_PATHNAME!, (req, res) => {
   res.render(PAGE.INDEX);
 });
-router.get(API.TODO!, getTodo);
-router.post(API.TODO!, setTodo)
+router.get(API.TODO!, getTodoRecords);
+router.post(API.TODO!, setTodos)
 
 export default router;

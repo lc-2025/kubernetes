@@ -1,45 +1,49 @@
 import { ERROR, PAGE, ROUTES } from '../utils/tokens';
 import { Request, Response } from 'express';
-import { TTodos } from '../types/Todo';
 import { validate } from '../utils/utilities';
+import {getTodos, setTodo} from '../services/todo';
 
 const { INDEX } = PAGE;
-let todos: TTodos = [];
 
 /**
- * @description TODO getter
+ * @description TODOs getter
  * @author Luca Cattide
  * @date 04/12/2025
  * @param {Request} request
  * @param {Response} response
  */
-const getTodo = (request: Request, response: Response): void => {
+const getTodoRecords = (request: Request, response: Response): void => {
   response.render(INDEX, {
     todos: (request.session as any).todos
   });
 }
 
 /**
- * @description TODO setter
+ * @description TODOs setter
  * @author Luca Cattide
- * @date 04/12/2025
+ * @date 12/12/2025
  * @param {Request} request
  * @param {Response} response
+ * @returns {*}  {Promise<void>}
  */
-const setTodo = (request: Request, response: Response): void => {
+const setTodos = async (request: Request, response: Response): Promise<void> => {
   if (!request.body || !request.body.todo) {
     response.status(400).send(ERROR.INPUT_MISSING);
   }
 
   validate(request, response);
 
-  todos = [
-    ...todos,
-    request.body.todo,
-  ];
+  await setTodo(request.body.todo);
+
+  const todos = await getTodos();
+
+  if (!todos) {
+    response.status(500).send(ERROR.QUERY);
+  }
 
   (request.session as any).todos = todos;
+
   response.redirect(ROUTES.API.TODO!);
 }
 
-export { getTodo, setTodo };
+export { getTodoRecords, setTodos };

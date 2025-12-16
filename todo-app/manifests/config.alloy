@@ -1,35 +1,33 @@
 discovery.kubernetes "pods" {
   role = "pod"
-  namespaces {
-    // App namespace
-    names = ["project"]
+}
+
+discovery.relabel "pod_logs" {
+  targets = discovery.kubernetes.pods.targets
+
+  rule {
+    source_labels = ["__meta_kubernetes_namespace"]
+    target_label = "project"
+  }
+
+  rule {
+    source_labels = ["__meta_kubernetes_pod_name"]
+    target_label = "todo-app"
+  }
+
+  rule {
+    source_labels = ["__meta_kubernetes_pod_container_name"]
+    target_label = "todo-app"
   }
 }
 
-// Tail log from PODs via Kubernetes API (alternative to local.file_match for filesystem)
-loki.source.kubernetes "express_logs" {
+loki.source.kubernetes "pods" {
   targets    = discovery.kubernetes.pods.targets
-  forward_to = [loki.process.filter.receiver]
-
-  // Filter by specific POD
-  selector {
-    role = "pod"
-    // Deployment label
-    label = "app=todo-app"
-  }
-
-  // Optional: Include Kubernetes metadata (pod name, namespace, labels)
-  include_metadata = true
+  forward_to = [loki.write.local.receiver]
 }
 
-/* loki.source.file "log_scrape" {
-  targets    = local.file_match.local_files.targets
-  forward_to = [loki.process.grafana_loki.receiver]
-  tail_from_end = true
-}
-
-loki.write "grafana_loki" {
+loki.write "local" {
   endpoint {
-    url = "http://loki-gateway.loki-stack.svc.cluster.local/loki/api/v1/push"
+    url = sys.env("http://loki-gateway.loki.svc.cluster.local/loki/api/v1/push")
   }
-} */
+}

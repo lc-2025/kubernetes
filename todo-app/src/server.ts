@@ -4,6 +4,7 @@ import cors from 'cors';
 import express, { json, urlencoded } from 'express';
 import hbs from 'hbs';
 import helmet from 'helmet';
+import logger from './logger';
 import middlewares from './middlewares';
 import path from 'path';
 import pool from './db';
@@ -24,6 +25,7 @@ import {
   SIGNAL,
   PLACEHOLDER,
 } from './utils/tokens';
+import {pinoHttp} from 'pino-http';
 
 const { POOL_CLOSE, TIMEOUT } = ERROR;
 const { DB, HTTP, SHUTDOWN } = LOG;
@@ -47,6 +49,9 @@ app.use(
     },
   }),
   json(),
+  pinoHttp({
+    logger,
+  }),
   rateLimit({
     windowMs: WINDOW,
     max: MAX_REQUESTS,

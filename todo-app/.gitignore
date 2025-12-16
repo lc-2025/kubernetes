@@ -1,3 +1,5 @@
 dist
 node_modules
+files/key.txt
+manifests/secret.yaml
 .env

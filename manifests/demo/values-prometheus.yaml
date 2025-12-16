@@ -1,0 +1,7 @@
+promtail:
+  enabled: false
+grafana:
+  adminPassword: prom-operator
+  persistence:
+    enabled: true
+    size: 10Gi

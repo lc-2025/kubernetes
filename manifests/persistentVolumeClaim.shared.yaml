@@ -2,9 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: shared-volume
-  namespace: exercises
 spec:
-  storageClassName: shared-volume
   accessModes:
     - ReadWriteOnce
   resources:

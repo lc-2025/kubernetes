@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: log-output-ping-pong-statefulset
+spec:
+  serviceName: log-output-ping-pong-service
+  replicas: 1
+  selector:
+    matchLabels:
+      app: log-output-ping-pong-app
+  template:
+    metadata:
+      labels:
+        app: log-output-ping-pong-app
+    spec:
+      volumes:
+        - name: shared-volume
+          configMap:
+            name: log-output
+            items:
+            - key: "information.txt"
+              path: "information.txt"
+          persistentVolumeClaim:
+            claimName: shared-volume
+      containers:
+        - name: log-output-getter-container
+          image: thespeaker33/log-output-getter
+          env:
+          - name: MESSAGE
+            valueFrom:
+              configMapKeyRef:
+                name: log-output
+                key: message
+          volumeMounts:
+          - name: shared-volume
+            mountPath: /usr/src/app/files
+        - name: ping-pong-container
+          image: thespeaker33/ping-pong
+          volumeMounts:
+          - name: shared-volume
+            mountPath: /usr/src/app/files
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: db-url
+        - name: ping-pong-db
+          image: postgres:16-alpine
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: db-password
+            - name: POSTGRES_DB
+              value: ping_pong
+          ports:
+            - name: database
+              containerPort: 5432
+          volumeMounts:
+            - name: ping-pong-volume
+              mountPath: /data
+  volumeClaimTemplates:
+    - metadata:
+        name: ping-pong-volume
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 100Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: log-output-ping-pong-service
+  labels:
+    app: ping-pong-db
+spec:
+  ports:
+  - port: 5432
+    name: database
+  clusterIP: None
+  selector:
+    app: log-output-ping-pong-app

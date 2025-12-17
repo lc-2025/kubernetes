@@ -32,3 +32,7 @@ University of Helsinki course exercises
 - [2.8](https://github.com/lc-2025/kubernetes/tree/2.8/todo-app)
 - [2.9](https://github.com/lc-2025/kubernetes/tree/2.9/todo-app)
 - [2.10](https://github.com/lc-2025/kubernetes/tree/2.10/todo-app)
+
+### Chapter 4
+
+- [3.1]((https://github.com/lc-2025/kubernetes/tree/3.1/ping-pong))

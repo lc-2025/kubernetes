@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: ping-pong
+  name: ping-pong-statefulset
 spec:
-  serviceName: ping-pong
+  serviceName: ping-pong-service
   replicas: 1
   selector:
     matchLabels:
-      app: ping-pong
+      app: ping-pong-app
   template:
     metadata:
       labels:
-        app: ping-pong
+        app: ping-pong-app
     spec:
       containers:
-        - name: ping-pong
+        - name: ping-pong-container
           image: thespeaker33/ping-pong
           env:
             - name: DATABASE_URL
@@ -22,7 +22,7 @@ spec:
                 secretKeyRef:
                   name: db-secret
                   key: db-url
-        - name: postgres
+        - name: ping-pong-db
           image: postgres:16-alpine
           env:
             - name: POSTGRES_PASSWORD
@@ -36,14 +36,13 @@ spec:
             - name: database
               containerPort: 5432
           volumeMounts:
-            - name: postgres
+            - name: ping-pong-volume
               mountPath: /data
   volumeClaimTemplates:
     - metadata:
-        name: postgres
+        name: ping-pong-volume
       spec:
         accessModes: ["ReadWriteOnce"]
-        storageClassName: local-path
         resources:
           requests:
             storage: 100Mi
@@ -51,13 +50,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: ping-pong
+  name: ping-pong-service
   labels:
-    app: postgres
+    app: ping-pong-db
 spec:
   ports:
   - port: 5432
     name: database
   clusterIP: None
   selector:
-    app: ping-pong
+    app: ping-pong-app

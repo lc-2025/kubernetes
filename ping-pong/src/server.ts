@@ -40,7 +40,8 @@ app.use(
     max: MAX_REQUESTS,
   }),
   router,
-  ssl,
+  // Excluding for testing purposes
+  /* ssl, */
   error,
 );
 

@@ -14,10 +14,10 @@ import {readStream} from '../utils/utilities';
  * @returns {*}  {Promise<void>}
  */
 const getStatus = async (request: Request, response: Response, next: NextFunction): Promise<void> => {
-  const { API, BASE_URL } = ROUTES;
+  const { API, BASE_URL_EXTERNAL } = ROUTES;
 
   try {
-    const pings = await axios.get(`${BASE_URL}:${PORT_EXTERNAL}${API.PINGS}`);
+    const pings = await axios.get(`${BASE_URL_EXTERNAL}:${PORT_EXTERNAL}${API.PINGS}`);
 
     if (!pings) {
       throw new Error(ERROR.FETCH);

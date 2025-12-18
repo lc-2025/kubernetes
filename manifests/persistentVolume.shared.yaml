@@ -17,4 +17,4 @@ spec:
         - key: kubernetes.io/hostname
           operator: In
           values:
-          - gke-dwk-cluster-default-pool-2b45c673-3m34
+          - gke-dwk-cluster-default-pool-30b87a27-1n8t

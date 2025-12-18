@@ -1,29 +1,29 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: log-output
+  name: log-output-deployment
   namespace: exercises
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: log-output
+      app: log-output-app
   template:
     metadata:
       labels:
-        app: log-output
+        app: log-output-app
     spec:
       volumes:
-        - name: log-output
+        - name: log-output-volume
           emptyDir: {}
       containers:
         - name: log-output-setter
           image: thespeaker33/log-output:latest
           volumeMounts:
-          - name: log-output
+          - name: log-output-volume
             mountPath: /usr/src/app/files
         - name: log-output-getter
           image: thespeaker33/log-output:latest
           volumeMounts:
-          - name: log-output
+          - name: log-output-volume
             mountPath: /usr/src/app/files

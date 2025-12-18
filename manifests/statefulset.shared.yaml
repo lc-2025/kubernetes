@@ -13,31 +13,26 @@ spec:
       labels:
         app: log-output-ping-pong-app
     spec:
-      volumes:
-        - name: shared-volume
-          configMap:
-            name: log-output
-            items:
-            - key: "information.txt"
-              path: "information.txt"
-          persistentVolumeClaim:
-            claimName: shared-volume
       containers:
-        - name: log-output-getter-container
-          image: thespeaker33/log-output-getter
+        - name: log-output-container
+          image: thespeaker33/log-output
           env:
           - name: MESSAGE
             valueFrom:
               configMapKeyRef:
-                name: log-output
+                name: log-output-configmap
                 key: message
           volumeMounts:
-          - name: shared-volume
+          - name: shared-temp-volume
             mountPath: /usr/src/app/files
+          - name: log-output-volume
+            mountPath: /usr/src/app/files/information.txt
+            subPath: information.txt
+            readOnly: true
         - name: ping-pong-container
           image: thespeaker33/ping-pong
           volumeMounts:
-          - name: shared-volume
+          - name: shared-temp-volume
             mountPath: /usr/src/app/files
           env:
             - name: DATABASE_URL
@@ -60,7 +55,18 @@ spec:
               containerPort: 5432
           volumeMounts:
             - name: ping-pong-volume
-              mountPath: /data
+              mountPath: /var/lib/postgresql/data
+              subPath: postgres
+      volumes:
+        - name: shared-temp-volume
+          persistentVolumeClaim:
+            claimName: shared-volume
+        - name: log-output-volume
+          configMap:
+            name: log-output-configmap
+            items:
+            - key: "information.txt"
+              path: "information.txt"
   volumeClaimTemplates:
     - metadata:
         name: ping-pong-volume

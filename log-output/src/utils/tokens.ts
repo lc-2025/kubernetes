@@ -40,6 +40,7 @@ const ROUTES = {
   },
   BASE_PATHNAME: '/',
   BASE_URL: 'http://localhost',
+  BASE_URL_EXTERNAL: 'http://ping-pong-nodeport'
 };
 const SERVER = process.env.SERVER || 'false';
 

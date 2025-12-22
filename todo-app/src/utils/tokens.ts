@@ -3,6 +3,7 @@ import 'dotenv/config';
 const { API_TODO, BASE_PATHNAME, BASE_URL, HOST, MAX_REQUEST, NODE_ENV, PORT, WINDOW, WIKI_RANDOM } = process.env;
 const CSP = {
   'connect-src': ["'self'", 'picsum.photos', 'fastly.picsum.photos'],
+  'form-action': ["'self'"],
   'img-src': ["'self'", 'picsum.photos', 'fastly.picsum.photos'],
 };
 const ERROR = {

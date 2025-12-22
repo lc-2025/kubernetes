@@ -22,6 +22,7 @@ ENV DATABASE_URL=${DATABASE_URL} \
   PORT=4000
 RUN npm run build
 FROM build
+COPY ./src/views ./dist
 EXPOSE $PORT
 RUN adduser -D appuser \
   && mkdir -p /etc/sudoers.d \

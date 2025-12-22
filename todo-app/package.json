@@ -8,7 +8,7 @@
     "dev": "nodemon ./src/server.ts",
     "lint": "eslint . && prettier --write . && prettier --check .",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc --project ./tsconfig.json && cp -r ./src/views ./dist/views",
+    "build": "tsc --project ./tsconfig.json && cp -r ./src/views ./dist",
     "seed": "node ./dist/seed.js",
     "start": "npm run seed && NODE_ENV=production node ./dist/server.js",
     "prepare": "husky"

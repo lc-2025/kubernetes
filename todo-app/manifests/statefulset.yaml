@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: todo-app
+  name: todo-app-statefulset
 spec:
-  serviceName: todo-app
+  serviceName: todo-app-clusterip
   replicas: 1
   selector:
     matchLabels:
@@ -14,7 +14,7 @@ spec:
         app: todo-app
     spec:
       containers:
-        - name: todo-app
+        - name: todo-app-container
           image: thespeaker33/todo-app
           env:
             - name: DATABASE_URL
@@ -22,7 +22,7 @@ spec:
                 secretKeyRef:
                   name: db-secret
                   key: db-url
-        - name: postgres
+        - name: todo-app-db
           image: postgres:16-alpine
           env:
             - name: POSTGRES_PASSWORD
@@ -36,14 +36,14 @@ spec:
             - name: database
               containerPort: 5432
           volumeMounts:
-            - name: postgres
-              mountPath: /data
+            - name: todo-app-volume
+              mountPath: /var/lib/postgresql/data
+              subPath: postgres
   volumeClaimTemplates:
     - metadata:
-        name: postgres
+        name: todo-app-volume
       spec:
         accessModes: ["ReadWriteOnce"]
-        storageClassName: local-path
         resources:
           requests:
             storage: 100Mi
@@ -51,9 +51,9 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: todo-app
+  name: todo-app-service
   labels:
-    app: postgres
+    app: todo-app-db
 spec:
   ports:
   - port: 5432

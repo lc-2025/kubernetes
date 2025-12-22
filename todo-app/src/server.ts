@@ -65,7 +65,8 @@ app.use(
     resave: false,
   }),
   router,
-  ssl,
+  // Excluding for testing purposes
+  /* ssl, */
   error,
 );
 

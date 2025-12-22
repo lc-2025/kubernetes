@@ -47,6 +47,9 @@ app.use(
     contentSecurityPolicy: {
       directives: CSP,
     },
+    crossOriginOpenerPolicy: {
+      policy: "same-origin"
+    }
   }),
   json(),
   pinoHttp({

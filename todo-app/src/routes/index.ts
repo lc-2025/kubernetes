@@ -7,7 +7,8 @@ const { API, BASE_PATHNAME } = ROUTES;
 const router = Router();
 
 router.get(BASE_PATHNAME!, (req, res) => {
-  res.render(PAGE.INDEX);
+  // Required by GKE to pass health check
+  res.status(200).render(PAGE.INDEX);
 });
 router.get(API.TODO!, getTodoRecords);
 router.post(API.TODO!, loggingMiddleware, setTodos);

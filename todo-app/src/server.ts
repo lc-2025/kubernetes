@@ -48,7 +48,7 @@ app.use(
       directives: CSP,
     },
     crossOriginOpenerPolicy: {
-      policy: "same-origin"
+      policy: 'same-origin'
     }
   }),
   json(),

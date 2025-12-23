@@ -1,0 +1,11 @@
+# See: https://itnext.io/kubernetes-kustomize-cheat-sheet-8e2d31b74d8f
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - deployment.yaml
+  - load-balancer.yaml
+# Used to selectively choose the image based on the pipeline
+images:
+  # Requires to put this token as placeholder in the correspondent manifest
+  - name: PROJECT/IMAGE
+    newName: jakousa/colorcontent

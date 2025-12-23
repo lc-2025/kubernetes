@@ -67,9 +67,9 @@ app.use(
     secret: PLACEHOLDER.SECRET,
     resave: false,
   }),
-  router,
   // Excluding for testing purposes
   /* ssl, */
+  router,
   error,
 );
 

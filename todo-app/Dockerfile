@@ -22,10 +22,14 @@ ENV DATABASE_URL=${DATABASE_URL} \
   PORT=${PORT}
 RUN npm run build
 FROM node:22-alpine AS run
+WORKDIR /usr/src/app
 ARG PORT
 ENV PORT=${PORT}
-COPY --from=build /usr/src/app/package*.json /usr/src/app/node_modules /usr/src/app/dist /usr/src/app/src/views ./
-RUN cp -r ./views ./dist \
+RUN --mount=type=bind,from=build,source=/usr/src/app,target=/build \
+  cp /build/package*.json . \
+  && cp -r /build/node_modules ./node_modules \
+  && cp -r /build/dist ./dist \
+  && cp -r /build/src/views ./dist \
   && adduser -D appuser \
   && mkdir -p /etc/sudoers.d \
   && echo "appuser ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/appuser \

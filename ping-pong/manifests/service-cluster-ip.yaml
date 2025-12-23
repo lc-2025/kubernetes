@@ -1,13 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: ping-pong-cluster-ip
-  namespace: exercises
+  name: ping-pong-clusterip
 spec:
   type: ClusterIP
   selector:
     app: ping-pong-app
   ports:
-    - port: 5070
+    - port: 80
       protocol: TCP
       targetPort: 5070

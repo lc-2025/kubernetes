@@ -4,6 +4,11 @@ Ping Pong web application.
 
 ## API Documentation (REST)
 
+- Root
+  - Endpoint: `/` (redirects to `/pingpong` - GKE only)
+  - Response: `200`
+  - Description: Verifies the service status
+
 - Status
   - Endpoint: `/pingpong`
   - Response: `200`

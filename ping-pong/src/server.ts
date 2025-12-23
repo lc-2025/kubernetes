@@ -39,9 +39,9 @@ app.use(
     windowMs: WINDOW,
     max: MAX_REQUESTS,
   }),
-  router,
   // Excluding for testing purposes
   /* ssl, */
+  router,
   error,
 );
 

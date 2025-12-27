@@ -4,8 +4,6 @@ University of Helsinki course exercises
 
 ## Exercises
 
-[![Release application](https://github.com/lc-2025/kubernetes/actions/workflows/main.yaml/badge.svg)](https://github.com/lc-2025/kubernetes/actions/workflows/main.yaml)
-
 ### Chapter 2
 
 - [1.1](https://github.com/lc-2025/kubernetes/tree/1.1/log-output)
@@ -42,3 +40,4 @@ University of Helsinki course exercises
 - [3.3](https://github.com/lc-2025/kubernetes/tree/3.3/todo)
 - [3.4](https://github.com/lc-2025/kubernetes/tree/3.4/ping-pong)
 - [3.5](https://github.com/lc-2025/kubernetes/tree/3.5/todo-app)
+- [3.6](https://github.com/lc-2025/kubernetes/tree/3.6/todo-app)

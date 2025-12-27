@@ -47,7 +47,7 @@ jobs:
           # Make the binary executable
           chmod +x /usr/local/bin/sops
       - name: Setup Age
-        run: apt install -y age
+        run: sudo apt install -y age
       - name: Decrypt secrets
         run: |-
           cd todo-app/manifests

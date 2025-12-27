@@ -38,7 +38,7 @@ jobs:
         run: cd todo-app && docker push $IMAGE_TAG
       - name: Set up Kustomize
         uses: imranismail/setup-kustomize@v2.1.0
-      - name: Set up SOPS/Age
+      - name: Set up SOPS
         run: |-
           # Download the SOPS binary
           curl -LO https://github.com/getsops/sops/releases/download/v3.11.0/sops-v3.11.0.linux.amd64
@@ -46,17 +46,18 @@ jobs:
           mv sops-v3.11.0.linux.amd64 /usr/local/bin/sops
           # Make the binary executable
           chmod +x /usr/local/bin/sops
-          # Install Age
-          apt install -y age
-      - name: Deploy
+      - name: Setup Age
+        run: apt install -y age
+      - name: Decrypt secrets
         run: |-
           cd todo-app/manifests
-          # Decrypt secrets
           touch age-key.txt
           echo "${{ secrets.AGE_KEY }}" > age-key.txt
           export SOPS_AGE_KEY_FILE=$(pwd)/age-key.txt
           sops --decrypt secret.enc.yaml > secret.yaml
-          # Deployment
+      - name: Deploy
+        run: |-
+          cd todo-app/manifests
           kustomize edit set image PROJECT/IMAGE=$IMAGE_TAG
           kustomize build . | kubectl apply -f -
           kubectl rollout status deployment $SERVICE

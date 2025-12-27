@@ -33,7 +33,7 @@ jobs:
       - name : 'Form the image name'
         run: echo "IMAGE_TAG=$REGISTRY/$PROJECT_ID/$REPOSITORY/$IMAGE:$BRANCH-$GITHUB_SHA" >> $GITHUB_ENV
       - name: Build
-        run: cd todo-app && docker build --tag $IMAGE_TAG --build-arg API_TODO=/todos --build-arg BASE_PATHNAME=/ --build-arg BASE_URL=http://localhost --build-arg HOST=0.0.0.0 --build-arg MAX_REQUETS=100 --build-arg PORT=4000 --build-arg WINDOW="15 * 60 * 1000"    --build-arg WIKI_RANDOM="https://en.wikipedia.org/wiki/Special:Random" --build-arg DATABASE_URL="${{ secrets.DB_URL }}"
+        run: cd todo-app && docker build --tag $IMAGE_TAG --build-arg API_TODO=/todos --build-arg BASE_PATHNAME=/ --build-arg BASE_URL=http://localhost --build-arg HOST=0.0.0.0 --build-arg MAX_REQUETS=100 --build-arg PORT=4000 --build-arg WINDOW="15 * 60 * 1000"    --build-arg WIKI_RANDOM="https://en.wikipedia.org/wiki/Special:Random" --build-arg DATABASE_URL="${{ secrets.DB_URL }}" .
       - name: Publish
         run: cd todo-app && docker push $IMAGE_TAG
       - name: Set up Kustomize

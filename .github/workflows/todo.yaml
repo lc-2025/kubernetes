@@ -59,12 +59,8 @@ jobs:
         run: |-
           cd todo-app/manifests
 
-          echo $([ "$GITHUB_REF" == *"main"* ] && echo "project" || echo "${GITHUB_REF#refs/heads/}")
-          echo "[ "$GITHUB_REF" == *"main"* ]"
-          echo "[ "${GITHUB_REF}" == *"main"* ]"
-
           # Updates from main branch must be set as 'project'
-          NAMESPACE=$([ "$GITHUB_REF" == *"main"* ] && echo "project" || echo "${GITHUB_REF#refs/heads/}")
+          NAMESPACE=$([ "$GITHUB_REF" == "refs/heads/main" ] && echo "project" || echo "${GITHUB_REF#refs/heads/}")
 
           # Create namespace from branchname if not exists
           kubectl create namespace $NAMESPACE || true

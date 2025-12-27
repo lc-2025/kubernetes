@@ -23,7 +23,7 @@ jobs:
       - name: 'Set up Cloud SDK'
         uses: google-github-actions/setup-gcloud@v2
       - name: 'Use gcloud CLI'
-        run: gcloud info && gcloud --quiet auth configure-docker
+        run: gcloud info && gcloud auth configure-docker europe-north1-docker.pkg.dev --quiet
       - name: 'Get GKE credentials'
         uses: 'google-github-actions/get-gke-credentials@v2'
         with:

@@ -2,7 +2,14 @@
 
 A TODO manager web application.
 
+[![Release application TODO](https://github.com/lc-2025/kubernetes/actions/workflows/todo.yaml/badge.svg)](https://github.com/lc-2025/kubernetes/actions/workflows/todo.yaml)
+
 ## API Documentation (REST)
+
+- Root
+  - Endpoint: `/`
+  - Response: `200`
+  - Description: Verifies the service status
 
 - `GET` todos
   - Endpoint: `/todos`

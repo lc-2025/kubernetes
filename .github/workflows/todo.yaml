@@ -54,7 +54,7 @@ jobs:
           touch age-key.txt
           echo "${{ secrets.AGE_KEY }}" > age-key.txt
           export SOPS_AGE_KEY_FILE=$(pwd)/age-key.txt
-          sops --decrypt secret.enc.yaml > secret.yaml
+          sops --decrypt --ignore-mac secret.enc.yaml > secret.yaml
       - name: Deploy
         run: |-
           cd todo-app/manifests

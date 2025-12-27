@@ -13,8 +13,6 @@ spec:
       labels:
         app: todo-app
     spec:
-      strategy:
-        type: Recreate
       containers:
         - name: todo-app-container
           image: thespeaker33/todo-app

@@ -8,7 +8,7 @@ env:
   REGISTRY: europe-north1-docker.pkg.dev
   REPOSITORY: dwk
   IMAGE: todo-app
-  SERVICE: todo-app
+  SERVICE: todo-app-statefulset
   BRANCH: ${{ github.ref_name }}
 jobs:
   build-publish-deploy:
@@ -60,5 +60,5 @@ jobs:
           cd todo-app/manifests
           kustomize edit set image PROJECT/IMAGE=$IMAGE_TAG
           kustomize build . | kubectl apply -f -
-          kubectl rollout status deployment $SERVICE
+          kubectl rollout status statefulset $SERVICE
           kubectl get services -o wide

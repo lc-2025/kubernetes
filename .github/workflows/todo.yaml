@@ -1,6 +1,8 @@
 name: Release application TODO
 on:
   push:
+    branches:
+      - '**'
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GKE_CLUSTER: dwk-cluster

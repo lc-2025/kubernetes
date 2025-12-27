@@ -58,9 +58,16 @@ jobs:
       - name: Deploy
         run: |-
           cd todo-app/manifests
-          kubectl create namespace ${GITHUB_REF#refs/heads/} || true
-          kubectl config set-context --current --namespace=${GITHUB_REF#refs/heads/}
-          kustomize edit set namespace ${GITHUB_REF#refs/heads/}
+
+          # Updates from main branch must be set as 'project'
+          NAMESPACE=$([ $GITHUB_REF == "main" ] && echo "project" || echo "${GITHUB_REF#refs/heads/}")
+
+          # Create namespace from branchname if not exists
+          kubectl create namespace $NAMESPACE || true
+          # Set the context to the new branch
+          kubectl config set-context --current --namespace=$NAMESPACE
+          # Set the new namespace
+          kustomize edit set namespace $NAMESPACE
           kustomize edit set image PROJECT/IMAGE=$IMAGE_TAG
           kustomize build . | kubectl apply -f -
           kubectl rollout status statefulset $SERVICE

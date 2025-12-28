@@ -19,6 +19,9 @@ spec:
           ports:
             - name: http
               containerPort: 4000
+          envFrom:
+            - configMapRef:
+                name: todo-app-configmap
           env:
             - name: DATABASE_URL
               valueFrom:

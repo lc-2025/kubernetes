@@ -3,12 +3,12 @@ kind: ConfigMap
 metadata:
   name: todo-app-configmap
 data:
-  configuration: |
-    api_todo=/todos
-    base_pathname=/
-    base_url=http://localhost
-    health=/healthz
-    host=0.0.0.0
-    max_requests=100
-    window=900000
-    wiki_random=https://en.wikipedia.org/wiki/Special:Random
+  API_TODO: "/todos"
+  BASE_PATHNAME: "/"
+  BASE_URL: "http://localhost"
+  HEALTH: "/healthz"
+  HOST: "0.0.0.0"
+  MAX_REQUEST: "100"
+  WINDOW: "900000"
+  WIKI_RANDOM: "https://en.wikipedia.org/wiki/Special:Random"
+  PORT: "4000"

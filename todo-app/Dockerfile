@@ -4,24 +4,6 @@ COPY package* .
 RUN npm i
 FROM setup AS build
 COPY . .
-ARG DATABASE_URL \
-  API_TODO \
-  BASE_PATHNAME \
-  BASE_URL \
-  HEALTH \
-  HOST \
-  WINDOW \
-  WIKI_RANDOM \
-  PORT
-ENV DATABASE_URL=${DATABASE_URL} \
-  API_TODO=${API_TODO} \
-  BASE_PATHNAME=${BASE_PATHNAME} \
-  BASE_URL=${BASE_URL} \
-  HEALTH=${HEALTH} \
-  HOST=${HOST} \
-  WINDOW=${WINDOW} \
-  WIKI_RANDOM=${WIKI_RANDOM} \
-  PORT=${PORT}
 RUN npm run build
 FROM node:22-alpine AS run
 WORKDIR /usr/src/app

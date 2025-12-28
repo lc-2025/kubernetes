@@ -34,7 +34,7 @@ const { SIGINT, SIGTERM } = SIGNAL;
 const { ssl, error } = middlewares;
 const app = express();
 
-app.set(PLACEHOLDER.PORT, PORT ?? PORT_DEFAULT);
+app.set(PLACEHOLDER.PORT, PORT ? parseInt(PORT, 10) : PORT_DEFAULT);
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(

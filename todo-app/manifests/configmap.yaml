@@ -10,5 +10,5 @@ data:
     health=/healthz
     host=0.0.0.0
     max_requests=100
-    window="15 * 60 * 1000"
+    window=900000
     wiki_random=https://en.wikipedia.org/wiki/Special:Random

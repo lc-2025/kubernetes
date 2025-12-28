@@ -6,6 +6,7 @@ resources:
   - configmap.yaml
   - statefulset.yaml
   - service-cluster-ip.yaml
+  - healthcheckpolicy.yaml
   - route.yaml
   - gateway.yaml
   - horizontalpodautoscaler.yaml

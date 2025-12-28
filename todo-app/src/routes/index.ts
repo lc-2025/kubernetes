@@ -11,7 +11,7 @@ router.get(BASE_PATHNAME!, (req, res) => {
   res.sendStatus(200);
 });
 router.get(`${BASE_PATHNAME}home`, (req, res) => {
-  res.status(200).render(PAGE.INDEX);
+  res.render(PAGE.INDEX);
 });
 router.get(API.TODO!, getTodoRecords);
 router.post(API.TODO!, loggingMiddleware, setTodos);

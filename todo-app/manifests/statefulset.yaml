@@ -15,13 +15,35 @@ spec:
     spec:
       containers:
         - name: todo-app-container
-          image: thespeaker33/todo-app
+          image: thespeaker33/todo-app:latest
+          ports:
+            - name: http
+              containerPort: 4000
           env:
             - name: DATABASE_URL
               valueFrom:
                 secretKeyRef:
                   name: todo-app-db-secret
                   key: db-url
+          # Sets the ready status on the container POD
+          readinessProbe:
+            httpGet:
+              # Specify the healthcheck route
+              path: /healthz
+              port: 4000
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 3
+          # Configure how the app should be restarted after an issue
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 4000
+            initialDelaySeconds: 20
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 6
           resources:
             requests:
               cpu: "100m"

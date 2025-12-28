@@ -8,5 +8,7 @@ resources:
   - service-cluster-ip.yaml
   - route.yaml
   - gateway.yaml
+  - horizontalpodautoscaler.yaml
+  - poddisruptionbudget.yaml
   - cronjob.yaml
   - cronjob.dump.yaml

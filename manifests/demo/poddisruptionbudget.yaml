@@ -1,0 +1,12 @@
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: example-app-pdb
+spec:
+  # A policy used in nodes auto-scaling to avoid autoscaling &/or volountary PODs disruptions collateral damages
+  # Used also in pair with vertical auto-scaling to limit the PODs eviction caused by resource increasing/decreasing
+  # I.e. half of the available PODs may result unavailable
+  maxUnavailable: 50%
+  selector:
+    matchLabels:
+      app: example-app

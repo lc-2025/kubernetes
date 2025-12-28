@@ -10,6 +10,12 @@ spec:
     - path:
         type: PathPrefix
         value: /
+    filters:
+    - type: URLRewrite
+      urlRewrite:
+        path:
+          type: ReplacePrefixMatch
+          replacePrefixMatch: /home
     backendRefs:
     - name: todo-app-clusterip
       port: 80

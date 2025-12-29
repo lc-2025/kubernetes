@@ -63,6 +63,7 @@ app.use(
     crossOriginOpenerPolicy: false,
     // Disable Strict-Transport Security for GKE demo
     hsts: false,
+    // Isolate origin from other processes disabled for GKE demo
     originAgentCluster: false,
   }),
   json(),

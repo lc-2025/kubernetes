@@ -13,7 +13,7 @@ spec:
       memory: "100Mi"
     max:
       cpu: "1"
-      memory: "15Mi"
+      memory: "150Mi"
     min:
       cpu: "10m"
       memory: "100Mi"

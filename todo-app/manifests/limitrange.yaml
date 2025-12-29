@@ -1,0 +1,20 @@
+# Sets limits for all the namespace pod containers
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: todo-app-limit-range
+spec:
+  limits:
+  - default:
+      cpu: "100m"
+      memory: "100Mi"
+    defaultRequest:
+      cpu: "100m"
+      memory: "108Mi"
+    max:
+      cpu: "1"
+      memory: "200Mi"
+    min:
+      cpu: "100m"
+      memory: "100Mi"
+    type: Container

@@ -13,3 +13,5 @@ resources:
   - poddisruptionbudget.yaml
   - cronjob.yaml
   - cronjob.dump.yaml
+  - resourcequotas.yaml
+  - limitrange.yaml

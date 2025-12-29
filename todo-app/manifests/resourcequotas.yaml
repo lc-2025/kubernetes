@@ -1,0 +1,20 @@
+# Set resources/limits at namespace level
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: todo-app-resource-quotas
+spec:
+  hard:
+    # Values are considered as total (combined)
+    requests.cpu: "200m"
+    requests.memory: "200Mi"
+    limits.cpu: "400m"
+    limits.memory: "400Mi"
+    # Services / Configurations are configurable as well
+    configmaps: "1"
+    persistentvolumeclaims: "1"
+    pods: "1"
+    replicationcontrollers: "1"
+    secrets: "1"
+    services: "2"
+    services.loadbalancers: "1"

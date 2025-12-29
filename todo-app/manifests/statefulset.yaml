@@ -53,11 +53,11 @@ spec:
           # required available resources when needed
           resources:
             requests:
-              cpu: "10m"
-              memory: "60Mi"
+              cpu: "20m"
+              memory: "80Mi"
             limits:
               cpu: "100m"
-              memory: "100Mi"
+              memory: "150Mi"
         - name: todo-app-db
           image: postgres:16-alpine
           env:
@@ -77,11 +77,11 @@ spec:
               subPath: postgres
           resources:
             requests:
-              cpu: "30m"
-              memory: "30Mi"
-            limits:
-              cpu: "50m"
+              cpu: "20m"
               memory: "50Mi"
+            limits:
+              cpu: "100m"
+              memory: "100Mi"
   volumeClaimTemplates:
     - metadata:
         name: todo-app-volume

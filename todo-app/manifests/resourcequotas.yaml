@@ -6,10 +6,10 @@ metadata:
 spec:
   hard:
     # Values are considered as total (combined)
-    requests.cpu: "10m"
-    requests.memory: "100Mi"
-    limits.cpu: "15m"
-    limits.memory: "150Mi"
+    requests.cpu: "40m"
+    requests.memory: "130Mi"
+    limits.cpu: "200m"
+    limits.memory: "250Mi"
     # Services / Configurations are configurable as well
     configmaps: "1"
     persistentvolumeclaims: "1"

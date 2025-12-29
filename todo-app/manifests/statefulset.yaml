@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: todo-app-container
-          image: thespeaker33/todo-app
+          image: PROJECT/IMAGE
           ports:
             - name: http
               containerPort: 4000

@@ -14,6 +14,7 @@ RUN --mount=type=bind,from=build,source=/usr/src/app,target=/build \
   && cp -r /build/node_modules ./node_modules \
   && cp -r /build/dist ./dist \
   && cp -r /build/src/views ./dist \
+  && cp -r /build/public ./public \
   && adduser -D appuser \
   && mkdir -p /etc/sudoers.d \
   && echo "appuser ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/appuser \

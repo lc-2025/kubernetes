@@ -22,6 +22,7 @@ import {
   RATE_LIMIT,
   EVENT,
   MESSAGE,
+  NODE_ENV,
   ERROR,
   LOG,
   SIGNAL,
@@ -49,9 +50,10 @@ app.use(
     contentSecurityPolicy: {
       directives: CSP,
     },
-    crossOriginOpenerPolicy: {
+    crossOriginOpenerPolicy: NODE_ENV === 'production' ? undefined : {
       policy: 'same-origin'
-    }
+    },
+    originAgentCluster: NODE_ENV === 'development',
   }),
   json(),
   pinoHttp({

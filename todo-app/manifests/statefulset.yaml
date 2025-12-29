@@ -47,6 +47,10 @@ spec:
             periodSeconds: 10
             timeoutSeconds: 5
             failureThreshold: 6
+          # In real scenarios resources are managed at namespace level
+          # via ResourceQuotas. Best practices expects to leave production namespaces unset
+          # and do instead for developmnet ones. In this way, production will benefit of all
+          # required available resources when needed
           resources:
             requests:
               cpu: "100m"

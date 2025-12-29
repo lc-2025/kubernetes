@@ -35,6 +35,10 @@ const { WINDOW, MAX_REQUESTS } = RATE_LIMIT;
 const { SIGINT, SIGTERM } = SIGNAL;
 const { ssl, error } = middlewares;
 const app = express();
+const defaultDirectives = helmet.contentSecurityPolicy.getDefaultDirectives();
+
+// Getting rif of SSL forcing on assets (CSS/JS/etc.) for GKE demo
+delete defaultDirectives["upgrade-insecure-requests"];
 
 app.set(PLACEHOLDER.PORT, PORT ? parseInt(PORT, 10) : PORT_DEFAULT);
 app.set('view engine', 'hbs');
@@ -47,10 +51,18 @@ app.use(
   urlencoded({ extended: true }),
   helmet({
     contentSecurityPolicy: {
-      directives: CSP,
+      directives:
+      {
+        ...defaultDirectives,
+        ...CSP,
+      },
+      // Manual configuration
+      useDefaults: false,
     },
     // Forcing HTTP configurations for GKE demo purposes
     crossOriginOpenerPolicy: false,
+    // Disable Strict-Transport Security for GKE demo
+    hsts: false,
     originAgentCluster: false,
   }),
   json(),

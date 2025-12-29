@@ -22,7 +22,6 @@ import {
   RATE_LIMIT,
   EVENT,
   MESSAGE,
-  NODE_ENV,
   ERROR,
   LOG,
   SIGNAL,
@@ -50,10 +49,9 @@ app.use(
     contentSecurityPolicy: {
       directives: CSP,
     },
-    crossOriginOpenerPolicy: NODE_ENV === 'production' ? undefined : {
-      policy: 'same-origin'
-    },
-    originAgentCluster: NODE_ENV === 'development',
+    // Forcing HTTP configurations for GKE demo purposes
+    crossOriginOpenerPolicy: false,
+    originAgentCluster: false,
   }),
   json(),
   pinoHttp({

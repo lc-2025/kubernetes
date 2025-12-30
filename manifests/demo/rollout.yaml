@@ -2,6 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 # In a canary strategy, the Rollout resource is set alongside Deployment (or anything else) in order to work as 'middleware'
 # during the rolling-out action. Before the end of the process, traffic is being redirected to another release - normally the new production one
 # or, in this case, to a parallel one (such as pre-release, beta or whatever)
+# This is valid for ongoing-projects, but for fresh ones complete yaml replacement is recommended
 kind: Rollout
 metadata:
   name: flaky-update-dep

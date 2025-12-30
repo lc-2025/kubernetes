@@ -1,0 +1,83 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: ping-pong-rollout
+  namespace: exercises
+spec:
+  # Minimum 2 recommended by Argo
+  replicas: 2
+  selector:
+    matchLabels:
+      app: ping-pong-app
+  strategy:
+    canary:
+      steps:
+      - setWeight: 25
+      - pause:
+          duration: 30s
+      - setWeight: 50
+      - pause:
+          duration: 30s
+      - analysis:
+          templates:
+          - templateName: ping-pong-restart-rate
+      stableService: ping-pong-service-stable
+      canaryService: ping-pong-service-canary
+  template:
+    metadata:
+      labels:
+        app: ping-pong-app
+    spec:
+      containers:
+        - name: ping-pong-container
+          image: thespeaker33/ping-pong
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: ping-pong-db-secret
+                  key: db-url
+          readinessProbe:
+            httpGet:
+              path: /pings
+              port: 5070
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /pings
+              port: 5070
+            initialDelaySeconds: 20
+            periodSeconds: 10
+            timeoutSeconds: 6
+            failureThreshold: 6
+---
+# When using Canary release for stateful services/resources, no sidecar containers are allowed in the same POD
+# Separating DB from the FE app is mandatory - (StatefulSet is not supported by Argo)
+# These two extra services connects the two containers in the Canary setup - respectively for stable and canary ones
+# where `ping-pong-clusterip` is preserved for the Gatweay
+# Stable service
+apiVersion: v1
+kind: Service
+metadata:
+  name: ping-pong-service-stable
+spec:
+  selector:
+    app: ping-pong-app
+  ports:
+    - port: 5070
+      targetPort: 5070
+---
+# Canary service
+apiVersion: v1
+kind: Service
+metadata:
+  name: ping-pong-service-canary
+spec:
+  selector:
+    app: ping-pong-app
+  ports:
+    - port: 5070
+      targetPort: 5070

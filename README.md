@@ -53,6 +53,7 @@ University of Helsinki course exercises
 - [4.1](https://github.com/lc-2025/kubernetes/tree/4.1)
 - [4.2](https://github.com/lc-2025/kubernetes/tree/4.2/todo-app)
 - [4.3](https://github.com/lc-2025/kubernetes/tree/4.3)
+- [4.4](https://github.com/lc-2025/kubernetes/tree/4.4/ping-pong)
 
 #### Prometheus
 

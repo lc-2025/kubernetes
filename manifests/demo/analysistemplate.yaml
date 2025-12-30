@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: restart-rate
+spec:
+  metrics:
+  - name: restart-rate
+    # Failing condition: The total number of restarts is greather than 2 over the last 2'
+    initialDelay: 2m
+    successCondition: result < 2
+    provider:
+      # Gather analysis metrics via Prometheus
+      prometheus:
+        address: http://kube-prometheus-stack-1767-prometheus.prometheus.svc.cluster.local:9090 # DNS name for my Prometheus
+        query: |
+          scalar(
+            sum(kube_pod_container_status_restarts_total{namespace="default", container="flaky-update"}) -
+            sum(kube_pod_container_status_restarts_total{namespace="default", container="flaky-update"} offset 2m)
+          )

@@ -2,35 +2,20 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: ping-pong-statefulset
+  namespace: exercises
 spec:
   serviceName: ping-pong-service
   replicas: 1
   selector:
     matchLabels:
-      app: ping-pong-app
+      app: ping-pong-db
   template:
     metadata:
       labels:
-        app: ping-pong-app
+        app: ping-pong-db
     spec:
       containers:
-        - name: ping-pong-container
-          image: thespeaker33/ping-pong
-          env:
-            - name: DATABASE_URL
-              valueFrom:
-                secretKeyRef:
-                  name: ping-pong-db-secret
-                  key: db-url
-          readinessProbe:
-            httpGet:
-              path: /pings
-              port: 5070
-            initialDelaySeconds: 10
-            periodSeconds: 5
-            timeoutSeconds: 3
-            failureThreshold: 3
-        - name: ping-pong-db
+        - name: ping-pong-database
           image: postgres:16-alpine
           env:
             - name: POSTGRES_PASSWORD
@@ -45,7 +30,8 @@ spec:
               containerPort: 5432
           volumeMounts:
             - name: ping-pong-volume
-              mountPath: /data
+              mountPath: /var/lib/postgresql/data
+              subPath: postgres
   volumeClaimTemplates:
     - metadata:
         name: ping-pong-volume
@@ -60,11 +46,11 @@ kind: Service
 metadata:
   name: ping-pong-service
   labels:
-    app: ping-pong-db
+    app: ping-pong-database
 spec:
   ports:
   - port: 5432
     name: database
   clusterIP: None
   selector:
-    app: ping-pong-app
+    app: ping-pong-db

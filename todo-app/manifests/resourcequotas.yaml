@@ -11,10 +11,12 @@ spec:
     limits.cpu: "400m"
     limits.memory: "400Mi"
     # Services / Configurations are configurable as well
-    configmaps: "1"
-    persistentvolumeclaims: "1"
-    pods: "1"
+    # Setting one or more than the actual requirements - i.e. configmaps, secrets, services, etc. - in order to support K8s automated substitution process
+    # Where the new is being added to the old one prior to remove it
+    configmaps: "2"
+    persistentvolumeclaims: "2"
+    pods: "2"
     replicationcontrollers: "1"
-    secrets: "1"
-    services: "2"
+    secrets: "2"
+    services: "4"
     services.loadbalancers: "1"

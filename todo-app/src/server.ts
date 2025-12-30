@@ -70,10 +70,11 @@ app.use(
   pinoHttp({
     logger,
   }),
-  rateLimit({
+  // Excluding for testing purposes - TODO: Tweak to find a balance with readiness/limitness probes
+  /* rateLimit({
     windowMs: WINDOW,
     max: MAX_REQUESTS,
-  }),
+  }), */
   session({
     cookie: {
       secure: false,

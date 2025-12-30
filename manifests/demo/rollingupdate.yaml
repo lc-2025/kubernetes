@@ -14,10 +14,17 @@ spec:
     spec:
       containers:
         - name: flaky-update
-          image: mluukkai/dwk-app8:v2
+          image: mluukkai/dwk-app8:v1
           readinessProbe:
             initialDelaySeconds: 10 # Initial delay until the readiness is tested
             periodSeconds: 5 # How often to test
             httpGet:
                path: /healthz
                port: 3541
+          livenessProbe:
+            initialDelaySeconds: 20 # Initial delay until the liveness is tested
+            periodSeconds: 5 # How often to test
+            httpGet:
+               path: /healthz
+               port: 3541
+          # Implement StartupProbe if app is slow to start to delay liveness

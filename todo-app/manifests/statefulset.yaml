@@ -29,6 +29,7 @@ spec:
                   name: todo-app-db-secret
                   key: db-url
           # Sets the ready status on the container POD in order to allow income traffic
+          # Had to implement this prior to task 4.1 due to app specifications
           readinessProbe:
             httpGet:
               # Specify the healthcheck route

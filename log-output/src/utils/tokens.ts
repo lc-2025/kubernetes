@@ -22,7 +22,7 @@ const MESSAGE_SERVER = {
 const PATH_SAVE = path.join(process.cwd(), `files/${FILE_HASH}`);
 const PATH_SAVE_CONF = path.join(process.cwd(), 'files/information.txt');
 const PATH_SAVE_COUNT = path.join(process.cwd(), 'files/count.txt');
-const PORT_DEFAULT = 4000;
+const PORT_DEFAULT = 5000;
 const PORT_EXTERNAL = 5070;
 const PROTOCOL = {
   HTTPS: 'https',

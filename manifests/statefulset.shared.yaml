@@ -29,6 +29,14 @@ spec:
             mountPath: /usr/src/app/files/information.txt
             subPath: information.txt
             readOnly: true
+          readinessProbe:
+            httpGet:
+              path: /api/status
+              port: 5000
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 3
         - name: ping-pong-container
           image: thespeaker33/ping-pong
           volumeMounts:
@@ -38,15 +46,23 @@ spec:
             - name: DATABASE_URL
               valueFrom:
                 secretKeyRef:
-                  name: db-secret
+                  name: ping-pong-db-secret
                   key: db-url
+          readinessProbe:
+            httpGet:
+              path: /pings
+              port: 5070
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 3
         - name: ping-pong-db
           image: postgres:16-alpine
           env:
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: db-secret
+                  name: ping-pong-db-secret
                   key: db-password
             - name: POSTGRES_DB
               value: ping_pong

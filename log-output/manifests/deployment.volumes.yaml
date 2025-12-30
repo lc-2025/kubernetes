@@ -22,6 +22,14 @@ spec:
           volumeMounts:
           - name: log-output-volume
             mountPath: /usr/src/app/files
+          readinessProbe:
+            httpGet:
+              path: /api/status
+              port: 5000
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 3
         - name: log-output-getter
           image: thespeaker33/log-output:latest
           volumeMounts:

@@ -35,10 +35,11 @@ app.use(
   cors(),
   helmet(),
   json(),
-  rateLimit({
+  // Excluding for testing purposes - TODO: Tweak to find a balance with readiness/limitness probes
+  /* rateLimit({
     windowMs: WINDOW,
     max: MAX_REQUESTS,
-  }),
+  }), */
   // Excluding for testing purposes
   /* ssl, */
   router,

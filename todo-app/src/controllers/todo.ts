@@ -1,7 +1,7 @@
-import { ERROR, PAGE, ROUTES, WIKI_RANDOM } from '../utils/tokens';
+import { ERROR, PAGE, WIKI_RANDOM } from '../utils/tokens';
 import { Request, Response } from 'express';
 import { validate } from '../utils/utilities';
-import { getTodos, setTodo, setTodoRandom } from '../services/todo';
+import { refreshPage, setTodo, setTodoRandom, updateTodo } from '../services/todo';
 
 const { INDEX } = PAGE;
 
@@ -14,6 +14,7 @@ const { INDEX } = PAGE;
  */
 const getTodoRecords = (request: Request, response: Response): void => {
   response.render(INDEX, {
+    dones: (request.session as any).dones,
     todos: (request.session as any).todos
   });
 }
@@ -41,15 +42,26 @@ const setTodos = async (request: Request, response: Response): Promise<void> => 
     await setTodo(request.body.todo);
   }
 
-  const todos = await getTodos();
-
-  if (!todos) {
-    response.status(500).send(ERROR.QUERY);
-  }
-
-  (request.session as any).todos = todos;
-
-  response.redirect(ROUTES.API.TODO!);
+  await refreshPage(request, response);
 }
 
-export { getTodoRecords, setTodos };
+/**
+ * @description TODO putter
+ * @author Luca Cattide
+ * @date 30/12/2025
+ * @param {Request} request
+ * @param {Response} response
+ * @returns {*}  {Promise<void>}
+ */
+const updateTodoRecord = async (request: Request, response: Response): Promise<void> => {
+  if (!request.body || !request.params.id) {
+    response.status(400).send(ERROR.INPUT_MISSING);
+  }
+
+  validate(request, response);
+
+  await updateTodo(parseInt(request.params.id!, 10));
+  await refreshPage(request, response);
+}
+
+export { getTodoRecords, setTodos, updateTodoRecord};

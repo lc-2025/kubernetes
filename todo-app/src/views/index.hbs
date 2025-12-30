@@ -17,9 +17,21 @@
         <input aria-required="true" class="form__input" id="todo" name="todo" type="text" maxlength="140" required />
         <input class="form__input" type="submit" value="Create todo" />
       </form>
+      <h2 class="wrapper__subtitle">Todo</h2>
       <ul class="wrapper__list">
         {{#each todos}}
-          <li class="list__item">{{this}}</li>
+          <li class="list__item">
+            {{this.task}}
+            <button class="form__input form__input--done" data-id="{{this.id}}">Mark as done</button>
+          </li>
+        {{/each}}
+      </ul>
+      <h2 class="wrapper__subtitle">Done</h2>
+      <ul class="wrapper__list">
+        {{#each dones}}
+          <li class="list__item">
+            {{this.task}}
+          </li>
         {{/each}}
       </ul>
     </main>

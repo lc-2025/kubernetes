@@ -1,26 +1,27 @@
-function handleForm() {
-  const form = document.getElementsByTagName('form')[0];
+function handleTodo() {
+  const done = document.querySelectorAll('.form__input--done');
 
-  //form.addEventListener('submit', saveTodo);
+  done.forEach((button) => {
+    button.addEventListener('click', markTodo);
+  });
 }
 
-function saveTodo(event) {
+function markTodo(event) {
   event.preventDefault();
-  fetch('http://localhost:4000/todos', {
-    body: JSON.stringify({
-      todo: event.target[0].value
-    }),
+  fetch(`http://localhost:4000/todos/${event.target.dataset.id}`, {
     headers: {
       'Content-type': 'application/json; charset=UTF-8',
     },
-    method: 'POST'
+    method: 'PUT'
   }).then((response) => {
     if (!response.ok) {
       throw new Error('HTTP error '+ response.status);
     }
+
+    window.location.reload();
   }).catch((error) => {
     console.error('Form error', error);
   });
 }
 
-handleForm();
+handleTodo();

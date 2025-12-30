@@ -1,9 +1,16 @@
-.form__label {
-  display: none;
-}
-
 footer {
   margin: 2rem 0 0;
+}
+
+.wrapper__form {
+
+  .form__input--done {
+    display: inline-block;
+  }
+
+  .form__label {
+    display: none;
+  }
 }
 
 .wrapper__image {

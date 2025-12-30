@@ -1,0 +1,52 @@
+apiVersion: argoproj.io/v1alpha1
+# In a canary strategy, the Rollout resource is set alongside Deployment (or anything else) in order to work as 'middleware'
+# during the rolling-out action. Before the end of the process, traffic is being redirected to another release - normally the new production one
+# or, in this case, to a parallel one (such as pre-release, beta or whatever)
+kind: Rollout
+metadata:
+  name: flaky-update-dep
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: flaky-update
+  strategy:
+    canary:
+      steps:
+      # Percentage of traffic to be redirected from production to canary release
+      - setWeight: 25
+      # Duration of the pause betweeen redirection phases
+      - pause:
+          duration: 30s
+      - setWeight: 50
+      - pause:
+          duration: 30s
+      # A plugin to perform metrics analysis on the new release to check if it will run as expected
+      # If the analysis fails, the canary rollout to the new version will be prevented
+      # An external tool - such as Prometheus - must be provided in order to check metrics/analysis
+      - analysis:
+          templates:
+          - templateName: restart-rate
+  template:
+    metadata:
+      labels:
+        app: flaky-update
+    spec:
+      containers:
+        - name: flaky-update
+          image: mluukkai/dwk-app8:v1
+          readinessProbe:
+            initialDelaySeconds: 10 # Initial delay until the readiness is tested
+            periodSeconds: 5 # How often to test
+            httpGet:
+               path: /healthz
+               port: 3541
+          livenessProbe:
+            initialDelaySeconds: 20 # Initial delay until the liveness is tested
+            periodSeconds: 5 # How often to test
+            httpGet:
+               path: /healthz
+               port: 3541
+
+---
+# the service definition could be put here

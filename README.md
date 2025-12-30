@@ -52,3 +52,12 @@ University of Helsinki course exercises
 
 - [4.1](https://github.com/lc-2025/kubernetes/tree/4.1)
 - [4.2](https://github.com/lc-2025/kubernetes/tree/4.2/todo-app)
+- [4.3](https://github.com/lc-2025/kubernetes/tree/4.3)
+
+#### Prometheus
+
+- Show the number of Pods created by `StatefulSet`:
+
+```bash
+sum(kube_pod_info{created_by_kind="StatefulSet"})
+```

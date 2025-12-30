@@ -13,6 +13,7 @@ spec:
     # Services / Configurations are configurable as well
     # Setting one or more than the actual requirements - i.e. configmaps, secrets, services, etc. - in order to support K8s automated substitution process
     # Where the new is being added to the old one prior to remove it
+    # Recommendation: Being strict with storage objects - volumes, etc. - being large with count-based - svc, pods, configs, secrets, etc.
     configmaps: "2"
     persistentvolumeclaims: "2"
     pods: "2"

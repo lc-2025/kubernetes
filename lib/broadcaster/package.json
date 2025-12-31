@@ -1,0 +1,37 @@
+{
+  "name": "dwk-broadcaster",
+  "version": "1.0.0",
+  "description": "Broadcaster service for NATS forwarding to external chat",
+  "main": "dist/broadcaster.js",
+  "private": true,
+  "scripts": {
+    "dev": "nodemon ./src/broadcaster.ts",
+    "lint": "eslint . && prettier --write . && prettier --check .",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc --project ./tsconfig.json",
+    "start": "node ./dist/broadcaster.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lc-2025/kubernetes/lib/broadcaster"
+  },
+  "author": "Luca Cattide",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "dwk-messenger": "file:../messenger/dist",
+    "dotenv": "^17.2.3"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@types/node": "^24.10.1",
+    "eslint": "^9.39.1",
+    "eslint-config-prettier": "^10.1.8",
+    "globals": "^16.5.0",
+    "husky": "^9.1.7",
+    "nodemon": "^3.1.11",
+    "prettier": "^3.6.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.47.0"
+  }
+}

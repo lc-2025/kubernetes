@@ -1,0 +1,30 @@
+{
+  "name": "@lc-2025/dwk",
+  "description": "DevOps with Kubernetes course exercises by University of Helsinki",
+  "version": "1.0.0",
+  "private": true,
+  "author": "Luca Cattide",
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lc-2025/kubernetes"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7"
+  },
+  "scripts": {
+    "setup": "npm i",
+    "setup:ci": "npm ci",
+    "lint": "npm run lint --ws",
+    "build": "npm run build --ws",
+    "prepare": "husky"
+  },
+  "workspaces": [
+    "./lib/broadcaster",
+    "./lib/logger",
+    "./lib/messaging",
+    "./exercises/log-output",
+    "./exercises/ping-pong",
+    "./project/todo-app"
+  ]
+}

@@ -35,9 +35,9 @@ jobs:
       - name : 'Form the image name'
         run: echo "IMAGE_TAG=$REGISTRY/$PROJECT_ID/$REPOSITORY/$IMAGE:$BRANCH-$GITHUB_SHA" >> $GITHUB_ENV
       - name: Build
-        run: cd todo-app && docker build --tag $IMAGE_TAG .
+        run: cd project/todo-app && docker build --tag $IMAGE_TAG .
       - name: Publish
-        run: cd todo-app && docker push $IMAGE_TAG
+        run: cd project/todo-app && docker push $IMAGE_TAG
       - name: Set up Kustomize
         uses: imranismail/setup-kustomize@v2.1.0
       - name: Set up SOPS
@@ -52,14 +52,14 @@ jobs:
         run: sudo apt install -y age
       - name: Decrypt secrets
         run: |-
-          cd todo-app/manifests
+          cd project/todo-app/manifests
           touch age-key.txt
           echo "${{ secrets.AGE_KEY }}" > age-key.txt
           export SOPS_AGE_KEY_FILE=$(pwd)/age-key.txt
           sops --decrypt --ignore-mac secret.enc.yaml > secret.yaml
       - name: Deploy
         run: |-
-          cd todo-app/manifests
+          cd project/todo-app/manifests
 
           # Updates from main branch must be set as 'project'
           NAMESPACE=$([ "$GITHUB_REF" == "refs/heads/main" ] && echo "project" || echo "${GITHUB_REF#refs/heads/}")

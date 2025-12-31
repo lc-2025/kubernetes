@@ -2,6 +2,48 @@
 
 University of Helsinki course exercises
 
+## Getting Started
+
+For any maintanance and/or trial needs, please refer to the following specifications and side-ones:
+
+- [Course examples](./examples/README.md)
+- [Course exercises](./backend/README.md)
+- [Libraries](./lib/README.md)
+- [Course project](./project/todo-app/README.md)
+
+## Repository
+
+The archive reflects a monolithic setting - monorepo - using _NPM Workspaces_ to organize all the related projects.
+Workspaces may be globally managed accordingly to the following specifications.
+
+## Setting Up
+
+On terminal, from project root:
+
+- To install dependencies for all the workspaces:
+
+```bash
+npm run setup
+```
+
+- To install dependencies in Continous-Integration mode for all the workspaces:
+
+```bash
+npm run setup:ci
+```
+
+- To lint the sources of all the workspaces:
+
+```bash
+npm run lint
+```
+
+- To build the production version of all the workspaces:
+
+```bash
+npm run build
+```
+
 ## Exercises
 
 ### Chapter 2

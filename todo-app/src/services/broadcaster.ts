@@ -1,0 +1,16 @@
+import { subscribeNats } from '../nats';
+
+// TODO: Compile as a separate app - with manifests, etc.
+
+/**
+ * @description NATS broadcaster
+ * Forwards messages to external chat API
+ * @author Luca Cattide
+ * @date 31/12/2025
+ * @returns {*}  {Promise<void>}
+ */
+const broadcaster = async (): Promise<void> => {
+  await subscribeNats();
+}
+
+export default broadcaster;

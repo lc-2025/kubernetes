@@ -1,0 +1,9 @@
+auth:
+  enabled: false
+exporter:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+    namespace: prometheus
+    additionalLabels:
+      release: kube-prometheus-stack-1767085068

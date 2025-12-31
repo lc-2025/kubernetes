@@ -9,11 +9,13 @@ import helmet from 'helmet';
 import logger from './logger';
 import middlewares from './middlewares';
 import path from 'path';
+import { pinoHttp } from 'pino-http';
 import pool from './db';
 import rateLimit from 'express-rate-limit';
 import router from './routes';
 import { Server } from 'http';
 import session from 'express-session';
+import { startNats } from './nats';
 import {
   CSP,
   HOST,
@@ -27,7 +29,7 @@ import {
   SIGNAL,
   PLACEHOLDER,
 } from './utils/tokens';
-import {pinoHttp} from 'pino-http';
+import broadcaster from './services/broadcaster';
 
 const { POOL_CLOSE, TIMEOUT } = ERROR;
 const { DB, HTTP, SHUTDOWN } = LOG;
@@ -92,9 +94,12 @@ app.use(
 /**
  * @description Server starting
  * @author Luca Cattide
- * @returns {*}  {Server}
+ * @returns {*}  {Promise<Server>}
  */
-const startServer = (): Server => {
+const startServer = async (): Promise<Server> => {
+  await startNats();
+  await broadcaster();
+
   const port = app.get(PLACEHOLDER.PORT);
 
   return app
@@ -117,7 +122,8 @@ const server = startServer();
  */
 const shutdown = async (signal: string): Promise<void> => {
   console.log(`${signal} ${SHUTDOWN}`);
-  server.close(async () => {
+
+  (await server).close(async () => {
     console.log(HTTP);
 
     try {
@@ -137,7 +143,7 @@ const shutdown = async (signal: string): Promise<void> => {
   }, 10000);
 }
 
-process.on(SIGINT, () => shutdown(SIGINT));
-process.on(SIGTERM, () => shutdown(SIGTERM));
+process.on(SIGINT, async () => await shutdown(SIGINT));
+process.on(SIGTERM, async () => await shutdown(SIGTERM));
 
 export default server;

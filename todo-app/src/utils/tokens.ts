@@ -1,4 +1,4 @@
-const { API_TODO, BASE_PATHNAME, BASE_URL, HEALTH, HOST, MAX_REQUEST, NODE_ENV, PORT, WINDOW, WIKI_RANDOM } = process.env;
+const { API_TODO, BASE_PATHNAME, BASE_URL, HEALTH, HOST, MAX_REQUEST, NATS_TIMEOUT, NATS_URL, NODE_ENV, PORT, PORT_NATS, WINDOW, WIKI_RANDOM } = process.env;
 const CSP = {
   'default-src': ["'self'"],
   'connect-src': ["'self'", 'picsum.photos', 'fastly.picsum.photos'],
@@ -12,6 +12,9 @@ const ERROR = {
   FETCH: 'Fetch error:',
   INPUT_INVALID: 'Invalid input',
   INPUT_MISSING: 'Missing input',
+  NATS_CLIENT: 'Cannot connect to NATS server. Please initialize client',
+  NATS_SERVER: 'Error connecting to NATS server',
+  NATS_SUBSCRIPTION: 'Subscription closing error',
   POOL: 'Unexpected error on idle client',
   POOL_CLOSE: 'Pool closing error:',
   QUERY: 'Query error:',
@@ -32,7 +35,19 @@ const LOG = {
 };
 const MESSAGE = {
   LISTEN: 'Server started in port',
+  NATS: {
+    CLOSED_CONNECTION: 'Connection closed',
+    CLOSED_SUBSCRIPTION: 'Subscription closed',
+    CONNECTED: 'Connected to NATS server version',
+    CREATED: 'A todo was created',
+    LISTENING: 'Listenting for',
+    SENT: '[Publisher]: Message sent to',
+    UPDATED: 'A todo was updated',
+  },
 };
+const NATS_CONNECTION = 'todo-app-nats';
+const NATS_SUBJECT = 'todos';
+const NATS_USER = 'bot';
 const PAGE = {
   INDEX: 'index',
 };
@@ -80,11 +95,17 @@ export {
   HOST,
   LOG,
   MESSAGE,
+  NATS_CONNECTION,
+  NATS_SUBJECT,
+  NATS_TIMEOUT,
+  NATS_URL,
+  NATS_USER,
   NODE_ENV,
   PAGE,
   PLACEHOLDER,
   PORT,
   PORT_DEFAULT,
+  PORT_NATS,
   PROTOCOL,
   RATE_LIMIT,
   ROUTES,

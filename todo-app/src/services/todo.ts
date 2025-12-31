@@ -1,9 +1,10 @@
 import { PoolClient } from 'pg';
 import { withTransaction } from '../db';
 import { QUERY_TODO } from '../queries/todo';
-import { ERROR, ROUTES } from '../utils/tokens';
+import { ERROR, MESSAGE, NATS_SUBJECT, NATS_USER, ROUTES } from '../utils/tokens';
 import { TTodos } from '../types/Todo';
 import { Request, Response } from 'express';
+import {publishNats} from '../nats';
 
 /**
  * @description TODOs getter
@@ -67,6 +68,10 @@ const setTodo = async (todo: string): Promise<void> => {
     await withTransaction(async (client: PoolClient) => {
       client.query(QUERY_TODO.INSERT, [todo]);
     });
+    await publishNats(NATS_SUBJECT, {
+      message: MESSAGE.NATS.CREATED,
+      user: NATS_USER,
+    });
   } catch (error) {
     console.error(error);
   }
@@ -105,6 +110,10 @@ const updateTodo = async (id: number): Promise<void> => {
   try {
     await withTransaction(async (client: PoolClient) => {
       client.query(QUERY_TODO.UPDATE, [id]);
+    });
+    await publishNats(NATS_SUBJECT, {
+      message: MESSAGE.NATS.UPDATED,
+      user: NATS_USER,
     });
   } catch (error) {
     console.error(error);

@@ -9,7 +9,7 @@ import {
   NATS_URL,
   NODE_ENV,
   PORT_NATS,
-} from '../../utils/tokens';
+} from 'dwk-utilities';
 
 const isDevelopment = NODE_ENV === 'development';
 const codec = StringCodec();
@@ -100,8 +100,18 @@ const subscribeNats = async (): Promise<void> => {
 
   for await (const message of subscription) {
     const data = JSON.parse(codec.decode(message.data));
+    const response = await fetch(process.env.DISCORD_WEBHOOK!, {
+      method: 'POST',
+      body: JSON.stringify({
+        content: 'A TODO was created',
+      })
+    });
 
-    // TODO: Send to Discord
+    if (!response.ok) {
+      logger.error(`Failed to send webhook: ${response.statusText}`);
+
+      continue;
+    }
 
     logger.info(`[${subscription.getProcessed()}]: ${data}`);
   }

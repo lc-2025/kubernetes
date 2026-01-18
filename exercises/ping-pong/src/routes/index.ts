@@ -1,6 +1,6 @@
 import { getPingPong, getPings } from '../controllers/pingPong';
 import { Router } from 'express';
-import { ROUTES } from '../utils/tokens';
+import { ROUTES } from '../utils/constants';
 
 const { API, BASE_PATHNAME } = ROUTES;
 const router = Router();

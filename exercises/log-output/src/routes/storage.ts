@@ -1,6 +1,6 @@
 import { getStorage } from '../controllers/storage';
 import { Router } from 'express';
-import {ROUTES} from '../utils/tokens';
+import {ROUTES} from '../utils/constants';
 
 const routerStorage = Router();
 

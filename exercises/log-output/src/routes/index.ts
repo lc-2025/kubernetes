@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import routerStatus from './status';
 import routerStorage from './storage';
-import { ROUTES } from '../utils/tokens';
+import { ROUTES } from '../utils/constants';
 
 const { API, BASE_PATHNAME } = ROUTES;
 const router = Router();

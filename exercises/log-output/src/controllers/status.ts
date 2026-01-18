@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { NextFunction, Request, Response } from 'express';
 import { printHashOnce } from '../services/hash';
-import { ERROR, MESSAGE, PATH_SAVE_CONF, PORT_EXTERNAL, ROUTES } from '../utils/tokens';
+import { ERROR, MESSAGE, PATH_SAVE_CONF, PORT_EXTERNAL, ROUTES } from '../utils/constants';
 import {readStream} from '../utils/utilities';
 
 /**

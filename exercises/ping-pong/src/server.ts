@@ -19,7 +19,7 @@ import {
   MESSAGE,
   SIGNAL,
   PLACEHOLDER,
-} from './utils/tokens';
+} from './utils/constants';
 
 const { POOL_CLOSE, TIMEOUT } = ERROR;
 const { DB, HTTP, SHUTDOWN } = LOG;

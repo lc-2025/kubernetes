@@ -15,6 +15,7 @@ import pool from './db';
 import router from './routes';
 import { Server } from 'http';
 import session from 'express-session';
+import { startNats } from 'dwk-messenger';
 import {
   CSP,
   HOST,
@@ -27,7 +28,7 @@ import {
   LOG,
   SIGNAL,
   PLACEHOLDER,
-} from './utils/tokens';
+} from './utils/constants';
 
 const { POOL_CLOSE, TIMEOUT } = ERROR;
 const { DB, HTTP, SHUTDOWN } = LOG;
@@ -38,7 +39,7 @@ const app = express();
 const defaultDirectives = helmet.contentSecurityPolicy.getDefaultDirectives();
 
 // Getting rif of SSL forcing on assets (CSS/JS/etc.) for GKE demo
-delete defaultDirectives["upgrade-insecure-requests"];
+delete defaultDirectives['upgrade-insecure-requests'];
 
 app.set(PLACEHOLDER.PORT, PORT ? parseInt(PORT, 10) : PORT_DEFAULT);
 app.set('view engine', 'hbs');
@@ -51,8 +52,7 @@ app.use(
   urlencoded({ extended: true }),
   helmet({
     contentSecurityPolicy: {
-      directives:
-      {
+      directives: {
         ...defaultDirectives,
         ...CSP,
       },
@@ -128,7 +128,7 @@ const shutdown = async (signal: string): Promise<void> => {
 
       console.log(DB);
       process.exit(0);
-    } catch(error) {
+    } catch (error) {
       console.error(POOL_CLOSE, error);
       process.exit(1);
     }
@@ -138,7 +138,7 @@ const shutdown = async (signal: string): Promise<void> => {
     console.error(TIMEOUT);
     process.exit(1);
   }, 10000);
-}
+};
 
 process.on(SIGINT, async () => await shutdown(SIGINT));
 process.on(SIGTERM, async () => await shutdown(SIGTERM));

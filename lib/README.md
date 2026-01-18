@@ -5,3 +5,4 @@ A set of utilities - packages, libraries and services - to provide shared utilit
 - [Messaging](./messaging/README.md)
 - [Broadcaster](./broadcaster/README.md)
 - [Logger](./logger/README.md)
+- [Utilities](./utilities/README.md)

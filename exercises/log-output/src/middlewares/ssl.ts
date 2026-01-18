@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { NODE_ENV, HEADER, PROTOCOL } from '../utils/tokens';
+import { NODE_ENV, HEADER, PROTOCOL } from '../utils/constants';
 
 /**
  * @description SSL middleware

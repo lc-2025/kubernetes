@@ -1,7 +1,7 @@
 import { Pool } from 'pg';
 import dotenv from 'dotenv';
 import { QUERY_TODO } from './queries/todo';
-import { ERROR, SEED, TRANSACTION } from './utils/tokens';
+import { ERROR, SEED, TRANSACTION } from './utils/constants';
 
 dotenv.config();
 

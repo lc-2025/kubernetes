@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import { getPingPongCount } from '../services/pingpong';
 import { NextFunction, Request, Response } from 'express';
-import { PATH_SAVE } from '../utils/tokens';
+import { PATH_SAVE } from '../utils/constants';
 
 /**
  * @description  Stores and returns the number of requests sent to the endpoint

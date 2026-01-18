@@ -1,6 +1,6 @@
 import Joi from 'joi';
 import { Request, Response } from 'express';
-import {ERROR} from './tokens';
+import {ERROR} from './constants';
 
 /**
  * @description Data validation helper

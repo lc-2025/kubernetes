@@ -16,13 +16,14 @@
     "setup": "npm i",
     "setup:ci": "npm ci",
     "lint": "npm run lint --ws",
-    "build": "npm run build --ws",
+    "build": "npm run build -w dwk-utilities && npm run build --ws",
     "prepare": "husky"
   },
   "workspaces": [
     "./lib/broadcaster",
     "./lib/logger",
-    "./lib/messaging",
+    "./lib/messenger",
+    "./lib/utilities",
     "./exercises/log-output",
     "./exercises/ping-pong",
     "./project/todo-app"

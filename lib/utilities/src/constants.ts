@@ -1,3 +1,5 @@
+import 'dotenv/config';
+
 const { NATS_TIMEOUT, NATS_URL, NODE_ENV, PORT_NATS } = process.env;
 const ERROR = {
   NATS_CLIENT: 'Cannot connect to NATS server. Please initialize client',

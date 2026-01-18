@@ -20,7 +20,7 @@
   "license": "UNLICENSED",
   "dependencies": {
     "dwk-logger": "file:../logger/dist",
-    "dotenv": "^17.2.3",
+    "dwk-utilities": "file:../utilities/dist",
     "nats": "^2.29.3"
   },
   "devDependencies": {

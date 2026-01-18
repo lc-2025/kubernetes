@@ -1,7 +1,5 @@
 import { subscribeNats } from 'dwk-messenger';
 
-// TODO: Compile as a separate app - with manifests, etc.
-
 /**
  * @description NATS broadcaster
  * Forwards messages to external chat API

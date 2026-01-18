@@ -1,5 +1,5 @@
 import fs from 'node:fs/promises';
-import {PATH_SAVE} from '../utils/tokens';
+import {PATH_SAVE} from '../utils/constants';
 
 /**
  * @description Timestamp getter

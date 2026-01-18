@@ -1,6 +1,6 @@
 import { getTodoRecords, setTodos, updateTodoRecord } from '../controllers/todo';
 import loggingMiddleware from '../middlewares/logging';
-import { PAGE, ROUTES } from '../utils/tokens';
+import { PAGE, ROUTES } from '../utils/constants';
 import { Router } from 'express';
 
 const { API, BASE_PATHNAME, HEALTH } = ROUTES;

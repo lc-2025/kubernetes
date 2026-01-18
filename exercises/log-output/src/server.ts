@@ -17,7 +17,7 @@ import {
   MESSAGE_SERVER,
   SERVER,
   CSP,
-} from './utils/tokens';
+} from './utils/constants';
 
 const { WINDOW, MAX_REQUESTS } = RATE_LIMIT;
 const { ssl, error } = middlewares;

@@ -1,9 +1,10 @@
 import { PoolClient } from 'pg';
 import { withTransaction } from '../db';
 import { QUERY_TODO } from '../queries/todo';
-import { ERROR, MESSAGE, NATS_SUBJECT, NATS_USER, ROUTES } from '../utils/tokens';
+import { ERROR, MESSAGE, NATS_SUBJECT, NATS_USER, ROUTES } from '../utils/constants';
 import { TTodos } from '../types/Todo';
 import { Request, Response } from 'express';
+import { publishNats } from 'dwk-messenger';
 
 /**
  * @description TODOs getter

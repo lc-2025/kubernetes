@@ -1,6 +1,6 @@
 import { getStatus } from '../controllers/status';
 import { Router } from 'express';
-import {ROUTES} from '../utils/tokens';
+import {ROUTES} from '../utils/constants';
 
 const routerStatus = Router();
 

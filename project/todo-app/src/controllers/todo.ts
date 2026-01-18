@@ -1,4 +1,4 @@
-import { ERROR, PAGE, WIKI_RANDOM } from '../utils/tokens';
+import { ERROR, PAGE, WIKI_RANDOM } from '../utils/constants';
 import { Request, Response } from 'express';
 import { validate } from '../utils/utilities';
 import { refreshPage, setTodo, setTodoRandom, updateTodo } from '../services/todo';
@@ -60,7 +60,7 @@ const updateTodoRecord = async (request: Request, response: Response): Promise<v
 
   validate(request, response);
 
-  await updateTodo(parseInt(request.params.id!, 10));
+  await updateTodo(parseInt(request.params.id! as string, 10));
   await refreshPage(request, response);
 }
 

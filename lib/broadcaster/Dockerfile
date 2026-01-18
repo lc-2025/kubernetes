@@ -7,9 +7,7 @@ COPY . .
 RUN npm run build
 FROM node:22-alpine AS run
 WORKDIR /usr/src/app
-ARG NATS_URL
-ARG PORT_NATS=4222
-ENV NATS_URL=${NATS_URL}
+ARG PORT=4080
 ENV PORT=${PORT}
 RUN --mount=type=bind,from=build,source=/usr/src/app,target=/build \
   cp /build/package*.json . \

@@ -1,7 +1,7 @@
 import { PoolClient } from 'pg';
 import { withTransaction } from '../db';
 import { GET, UPDATE } from '../queries/ping-pong';
-import {ERROR} from '../utils/tokens';
+import {ERROR} from '../utils/constants';
 
 /**
  * @description Ping Pong counter getter

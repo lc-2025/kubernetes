@@ -1,7 +1,7 @@
 import { Pool, QueryResult, PoolClient } from 'pg';
 import Cursor from 'pg-cursor';
 import dotenv from 'dotenv';
-import { ERROR, LOG, TRANSACTION } from './utils/tokens';
+import { ERROR, LOG, TRANSACTION } from './utils/constants';
 
 dotenv.config();
 

@@ -1,0 +1,39 @@
+{
+  "name": "dwk-dummy-site",
+  "version": "1.0.0",
+  "description": "Creates a dummy copy of a website",
+  "main": "dist/index.js",
+  "private": true,
+  "scripts": {
+    "dev": "nodemon ./src/index.ts",
+    "lint": "eslint . && prettier --write . && prettier --check .",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc --project ./tsconfig.json",
+    "start": "node ./dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lc-2025/kubernetes/exercises/dummy-site"
+  },
+  "author": "Luca Cattide",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@kubernetes/client-node": "^1.4.0",
+    "axios": "^1.7.7",
+    "dwk-logger": "file:../../lib/logger/dist"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@types/node": "^24.10.1",
+    "@types/ws": "^8.5.13",
+    "eslint": "^9.39.1",
+    "eslint-config-prettier": "^10.1.8",
+    "globals": "^16.5.0",
+    "husky": "^9.1.7",
+    "nodemon": "^3.1.11",
+    "prettier": "^3.6.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.47.0"
+  }
+}

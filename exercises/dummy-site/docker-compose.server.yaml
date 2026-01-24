@@ -1,0 +1,8 @@
+services:
+  log-output:
+    build:
+      dockerfile: ./Dockerfile
+    container_name: dummy-site
+    image: thespeaker33/dummy-site
+    ports:
+      - ${PORT}:${PORT}

@@ -111,3 +111,7 @@ sum(kube_pod_info{created_by_kind="StatefulSet"})
 - [4.8](https://github.com/lc-2025/kubernetes/tree/v4.8/project/todo-app)
 - [4.9](https://github.com/lc-2025/kubernetes/tree/4.9/project/todo-app)
 - [4.10](https://github.com/lc-2025/kubernetes/tree/4.10/project/todo-app)
+
+### Chapter 6
+
+- [5.1](https://github.com/lc-2025/kubernetes/tree/5.1/exercises/dummy-site)

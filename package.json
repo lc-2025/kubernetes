@@ -24,6 +24,7 @@
     "./lib/logger",
     "./lib/messenger",
     "./lib/utilities",
+    "./exercises/dummy-site",
     "./exercises/log-output",
     "./exercises/ping-pong",
     "./project/todo-app"

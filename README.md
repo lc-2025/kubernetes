@@ -115,3 +115,4 @@ sum(kube_pod_info{created_by_kind="StatefulSet"})
 ### Chapter 6
 
 - [5.1](https://github.com/lc-2025/kubernetes/tree/5.1/exercises/dummy-site)
+- [5.2](https://github.com/lc-2025/kubernetes/tree/5.2)

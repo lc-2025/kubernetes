@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: dwk1-app-dep
 spec:
+  # On real case scenarios, better to omit replicas to rely on Argo automated scaling features based on requirements
   replicas: 5
   selector:
     matchLabels:
@@ -14,6 +15,7 @@ spec:
     spec:
       containers:
         - name: dwk1
+          # On real case scenarios, better to add a `?ref=<FINGERPRINT>` to ensure fresh pulls - i.e. GitHub SHA
           image: PROJECT/IMAGE
           ports:
             - containerPort: 3000

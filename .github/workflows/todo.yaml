@@ -50,9 +50,14 @@ jobs:
           chmod +x /usr/local/bin/sops
       - name: Setup Age
         run: sudo apt install -y age
+      - name: Checkout configuration repository
+        uses: actions/checkout@v4
+        with:
+          repository: lc-2025/kubernetes-configurations
+          path: kubernetes-configurations
       - name: Decrypt secrets
         run: |-
-          cd project/todo-app/manifests
+          cd kubernetes-configurations/manifests
           touch age-key.txt
           echo "${{ secrets.AGE_KEY }}" > age-key.txt
           export SOPS_AGE_KEY_FILE=$(pwd)/age-key.txt
@@ -70,7 +75,7 @@ jobs:
           fi
       - name: Deploy
         run: |-
-          cd project/todo-app/manifests
+          cd kubernetes-configurations/manifests
 
           # Determine environment based on commit signature
           # Production: signed commits (verified=true) / Staging: unsigned commits

@@ -1,16 +1,18 @@
 FROM node:22-alpine AS build
 WORKDIR /usr/src/app
-COPY package*.json ./
-COPY lib/broadcaster/package*.json ./lib/broadcaster/
-COPY lib/messenger/package*.json ./lib/messenger/
-COPY lib/logger/package*.json ./lib/logger/
-COPY lib/utilities/package*.json ./lib/utilities/
-RUN npm ci
-COPY lib/utilities/ ./lib/utilities/
-COPY lib/logger/ ./lib/logger/
-COPY lib/messenger/ ./lib/messenger/
-COPY lib/broadcaster/ ./lib/broadcaster/
-RUN npm run build
+RUN --mount=type=bind,source=.,target=/src \
+  mkdir -p ./lib/broadcaster ./lib/messenger ./lib/logger ./lib/utilities && \
+  cp /src/package*.json . && \
+  cp /src/lib/broadcaster/package*.json ./lib/broadcaster/ && \
+  cp /src/lib/messenger/package*.json ./lib/messenger/ && \
+  cp /src/lib/logger/package*.json ./lib/logger/ && \
+  cp /src/lib/utilities/package*.json ./lib/utilities/ && \
+  npm ci && \
+  cp -r /src/lib/utilities ./lib/utilities && \
+  cp -r /src/lib/logger ./lib/logger && \
+  cp -r /src/lib/messenger ./lib/messenger && \
+  cp -r /src/lib/broadcaster ./lib/broadcaster && \
+  npm run build
 FROM node:22-alpine AS run
 WORKDIR /usr/src/app
 ARG PORT=4080

@@ -1,7 +1,7 @@
 import { PoolClient } from 'pg';
 import { withTransaction } from '../db';
 import { QUERY_TODO } from '../queries/todo';
-import { ERROR, MESSAGE, NATS_SUBJECT, NATS_USER, ROUTES } from '../utils/constants';
+import { ERROR, MESSAGE, NATS_SUBJECT, NATS_USER, ROUTES, VERSION } from '../utils/constants';
 import { TTodos } from '../types/Todo';
 import { Request, Response } from 'express';
 import { publishNats } from 'dwk-messenger';
@@ -68,10 +68,17 @@ const setTodo = async (todo: string): Promise<void> => {
     await withTransaction(async (client: PoolClient) => {
       client.query(QUERY_TODO.INSERT, [todo]);
     });
-    await publishNats(NATS_SUBJECT, {
+
+    const payload = {
       message: MESSAGE.NATS.CREATED,
       user: NATS_USER,
-    });
+    };
+
+    if (VERSION === 'staging') {
+      console.log(payload);
+    } else {
+      await publishNats(NATS_SUBJECT, payload);
+    }
   } catch (error) {
     console.error(error);
   }

@@ -1,4 +1,4 @@
-const { API_TODO, BASE_PATHNAME, BASE_URL, HEALTH, HOST, MAX_REQUEST, NATS_TIMEOUT, NATS_URL, NODE_ENV, PORT, PORT_NATS, WINDOW, WIKI_RANDOM } = process.env;
+const { API_TODO, BASE_PATHNAME, BASE_URL, HEALTH, HOST, MAX_REQUEST, NATS_TIMEOUT, NATS_URL, NODE_ENV, PORT, PORT_NATS, WINDOW, WIKI_RANDOM, VERSION } = process.env;
 const CSP = {
   'default-src': ["'self'"],
   'connect-src': ["'self'", 'picsum.photos', 'fastly.picsum.photos'],
@@ -113,4 +113,5 @@ export {
   SIGNAL,
   TRANSACTION,
   WIKI_RANDOM,
+  VERSION
 };

@@ -7,7 +7,9 @@ COPY . .
 RUN npm run build
 FROM node:22-alpine AS run
 WORKDIR /usr/src/app
+ARG VERSION
 ARG PORT=4000
+ENV VERSION=${VERSION}
 ENV PORT=${PORT}
 RUN --mount=type=bind,from=build,source=/usr/src/app,target=/build \
   cp /build/package*.json . \

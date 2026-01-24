@@ -57,20 +57,44 @@ jobs:
           echo "${{ secrets.AGE_KEY }}" > age-key.txt
           export SOPS_AGE_KEY_FILE=$(pwd)/age-key.txt
           sops --decrypt --ignore-mac secret.enc.yaml > secret.yaml
+      - name: Check commit signature
+        id: check_signature
+        run: |-
+          # Check if the current commit is signed
+          COMMIT_SIGNATURE=$(git log -1 --format=%G? ${{ github.sha }})
+
+          if [ "$COMMIT_SIGNATURE" == "G" ] || [ "$COMMIT_SIGNATURE" == "U" ]; then
+            echo "verified=true" >> $GITHUB_OUTPUT
+          else
+            echo "verified=false" >> $GITHUB_OUTPUT
+          fi
       - name: Deploy
         run: |-
           cd project/todo-app/manifests
 
-          # Updates from main branch must be set as 'project'
-          NAMESPACE=$([ "$GITHUB_REF" == "refs/heads/main" ] && echo "project" || echo "${GITHUB_REF#refs/heads/}")
+          # Determine environment based on commit signature
+          # Production: signed commits (verified=true) / Staging: unsigned commits
+          if [ "${{ steps.check_signature.outputs.verified }}" == "true" ]; then
+            ENV="production"
+            NAMESPACE="project-production"
+            OVERLAY="overlays/production"
+            STATEFULSET="prod-todo-app-statefulset"
+          else
+            ENV="staging"
+            NAMESPACE="project-staging"
+            OVERLAY="overlays/staging"
+            STATEFULSET="staging-todo-app-statefulset"
+          fi
 
-          # Create namespace from branchname if not exists
+          echo "Deploying to $ENV environment in namespace $NAMESPACE"
+          # Create namespace if it does not exist
           kubectl create namespace $NAMESPACE || true
-          # Set the context to the new branch
+          # Set the context to the namespace
           kubectl config set-context --current --namespace=$NAMESPACE
-          # Set the new namespace
-          kustomize edit set namespace $NAMESPACE
-          kustomize edit set image PROJECT/IMAGE=$IMAGE_TAG
-          kustomize build . | kubectl apply -f -
-          kubectl rollout status statefulset $SERVICE
+          # Set the image tag in the appropriate overlay
+          kustomize edit set image PROJECT/IMAGE=$IMAGE_TAG --kustomization=$OVERLAY
+          # Build and apply the manifest
+          kustomize build $OVERLAY | kubectl apply -f -
+          # Wait for the StatefulSet to rollout
+          kubectl rollout status statefulset $STATEFULSET
           kubectl get services -o wide

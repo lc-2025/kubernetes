@@ -1,0 +1,31 @@
+name: Build and publish application Log Output
+on:
+  push:
+jobs:
+  build-publish:
+    name: Build, Push, Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build and publish
+        run: |-
+          cd exercises/log-output
+          docker build --tag "PROJECT/IMAGE:$GITHUB_SHA" -f ./Dockerfile server .
+          docker push "PROJECT/IMAGE:$GITHUB_SHA"
+      - name: Set up Kustomize
+        uses: imranismail/setup-kustomize@v2
+      - name: Use right image
+        env:
+          PROJECT_IMAGE: thespeaker33/log-output
+        run: kustomize edit set image PROJECT/IMAGE=${{ env.PROJECT_IMAGE }}:$GITHUB_SHA
+      - name: commit kustomization.yaml to GitHub
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: 'kustomization.yaml'
+          message: New version released ${{ github.sha }}

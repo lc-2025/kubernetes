@@ -3,3 +3,9 @@ kind: Kustomization
 namespace: exercises
 resources:
   - configmap.yaml
+  - deployment.volumes.yaml
+  - service-cluster-ip.yaml
+  - service-ingress.yaml
+images:
+  - name: PROJECT/IMAGE
+    newName: thespeaker33/log-output

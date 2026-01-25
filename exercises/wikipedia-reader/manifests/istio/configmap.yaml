@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: wikipedia-reader-configmap
+  namespace: exercises
+data:
+  SHARED_VOLUME: /data/www
+  RANDOM_MIN_SECONDS: "300"
+  RANDOM_MAX_SECONDS: "900"
+  NODE_ENV: "production"

@@ -1,0 +1,20 @@
+# Istio Ingress Gateway for Wikipedia Reader app
+# Provides external access to the Wikipedia Reader service
+apiVersion: install.istio.io/v1alpha1
+kind: IstioOperator
+metadata:
+  name: wikipedia-reader-gateway
+  namespace: exercises
+spec:
+  profile: empty
+  components:
+    ingressGateways:
+      - name: wikipedia-reader-gateway
+        namespace: exercises
+        enabled: true
+        label:
+          wikipedia-reader: gateway
+  values:
+    gateways:
+      wikipedia-reader-gateway:
+        injectionTemplate: gateway

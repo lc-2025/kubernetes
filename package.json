@@ -27,6 +27,7 @@
     "./exercises/dummy-site",
     "./exercises/log-output",
     "./exercises/ping-pong",
+    "./exercises/wikipedia-reader",
     "./project/todo-app"
   ]
 }

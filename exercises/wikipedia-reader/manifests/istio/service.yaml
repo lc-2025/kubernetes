@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: wikipedia-reader-service
+  namespace: exercises
+spec:
+  type: ClusterIP
+  selector:
+    app: wikipedia-reader
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 80
+      name: http

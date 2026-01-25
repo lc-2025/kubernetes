@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wikipedia-reader-deployment
+  namespace: exercises
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wikipedia-reader
+  template:
+    metadata:
+      labels:
+        app: wikipedia-reader
+    spec:
+      # Init container: fetches Kubernetes Wikipedia page at startup
+      initContainers:
+        - name: init-container
+          image: thespeaker33/wikipedia-reader-init:latest
+          envFrom:
+            - configMapRef:
+                name: wikipedia-reader-configmap
+          volumeMounts:
+            - name: shared-volume
+              mountPath: /data/www
+      # Main containers
+      containers:
+        # Main nginx container serving static Wikipedia pages
+        - name: nginx-container
+          image: nginx:alpine
+          ports:
+            - containerPort: 80
+              name: http
+          volumeMounts:
+            - name: shared-volume
+              mountPath: /usr/share/nginx/html
+              readOnly: true
+          # Health check for nginx
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          resources:
+            requests:
+              cpu: 100m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi
+        # Sidecar container: fetches random Wikipedia pages periodically
+        - name: sidecar-container
+          image: thespeaker33/wikipedia-reader-sidecar:latest
+          envFrom:
+            - configMapRef:
+                name: wikipedia-reader-configmap
+          volumeMounts:
+            - name: shared-volume
+              mountPath: /data/www
+          resources:
+            requests:
+              cpu: 100m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi
+      # Shared volume for Wikipedia pages (emptyDir for pod lifetime)
+      volumes:
+        - name: shared-volume
+          emptyDir: {}

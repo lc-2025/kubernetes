@@ -1,0 +1,48 @@
+version: '3.8'
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    container_name: wikipedia-reader-nginx-dev
+    ports:
+      - '80:80'
+    volumes:
+      - wiki-data:/data/www
+    networks:
+      - wiki-network
+    depends_on:
+      - init-container
+  init-container:
+    build:
+      context: .
+      dockerfile: Dockerfile.init
+    container_name: wikipedia-reader-init-dev
+    environment:
+      - SHARED_VOLUME=${SHARED_VOLUME}
+      - RANDOM_MIN_SECONDS=${RANDOM_MIN_SECONDS_DEV}
+      - RANDOM_MAX_SECONDS=${RANDOM_MAX_SECONDS_DEV}
+    volumes:
+      - wiki-data:/data/www
+    networks:
+      - wiki-network
+  sidecar:
+    build:
+      context: .
+      dockerfile: Dockerfile.sidecar
+    container_name: wikipedia-reader-sidecar-dev
+    environment:
+      - SHARED_VOLUME=${SHARED_VOLUME}
+      - RANDOM_MIN_SECONDS=${RANDOM_MIN_SECONDS_DEV}
+      - RANDOM_MAX_SECONDS=${RANDOM_MAX_SECONDS_DEV}
+    volumes:
+      - wiki-data:/data/www
+    networks:
+      - wiki-network
+    depends_on:
+      - nginx
+volumes:
+  wiki-data:
+networks:
+  wiki-network:
+    driver: bridge

@@ -1,0 +1,69 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: log-output-v1
+  namespace: exercises
+spec:
+  selector:
+    matchLabels:
+      app: log-output
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: log-output
+        version: v1
+    spec:
+      containers:
+        - name: log-output-container
+          image: thespeaker33/log-output
+          env:
+          - name: MESSAGE
+            valueFrom:
+              configMapKeyRef:
+                name: log-output-configmap
+                key: message
+          - name: VERSION
+            valueFrom:
+              configMapKeyRef:
+                name: log-output-configmap
+                key: version-1
+      volumeMounts:
+      - name: log-output-volume
+        mountPath: "/usr/src/app/files"
+        readOnly: true
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: log-output-v2
+  namespace: exercises
+spec:
+  selector:
+    matchLabels:
+      app: log-output
+      version: v2
+  template:
+    metadata:
+      labels:
+        app: log-output
+        version: v2
+    spec:
+      containers:
+        - name: log-output-container
+          image: thespeaker33/log-output
+          env:
+          - name: MESSAGE
+            valueFrom:
+              configMapKeyRef:
+                name: log-output-configmap
+                key: message
+          - name: VERSION
+            valueFrom:
+              configMapKeyRef:
+                name: log-output-configmap
+                key: version-2
+      volumeMounts:
+      - name: log-output-volume
+        mountPath: "/usr/src/app/files"
+        readOnly: true

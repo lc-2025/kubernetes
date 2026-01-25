@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import path from 'node:path';
 
-const { NODE_ENV, MESSAGE, PORT } = process.env;
+const { NODE_ENV, MESSAGE, PORT, VERSION } = process.env;
 const CSP = {
   'connect-src': ["'self'", 'localhost:5070'],
 };
@@ -64,4 +64,5 @@ export {
   RATE_LIMIT,
   ROUTES,
   SERVER,
+  VERSION
 };

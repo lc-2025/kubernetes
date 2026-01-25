@@ -4,5 +4,7 @@ metadata:
   name: log-output-configmap
 data:
   message: "hello world"
+  version-1: "v1"
+  version-2: "v2"
   information.txt: |
     this text is from file

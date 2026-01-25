@@ -1,0 +1,17 @@
+apiVersion: install.istio.io/v1alpha1
+kind: IstioOperator
+metadata:
+  name: ingress
+spec:
+  profile: empty
+  components:
+    ingressGateways:
+    - name: log-output-gateway
+      namespace: exercises
+      enabled: true
+      label:
+        log-output: gateway
+  values:
+    gateways:
+      log-output-gateway:
+        injectionTemplate: gateway

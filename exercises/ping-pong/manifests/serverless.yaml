@@ -1,0 +1,16 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: ping-pong-app
+spec:
+  template:
+    metadata:
+      labels:
+        app: ping-pong-app
+    spec:
+      containers:
+      - name: ping-pong-container
+        image: thespeaker33/ping-pong:latest
+        ports:
+        - containerPort: 8080
+          protocol: TCP

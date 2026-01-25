@@ -7,6 +7,6 @@ spec:
   selector:
     app: ping-pong-app
   ports:
-    - port: 5070
+    - port: 8080
       protocol: TCP
-      targetPort: 5070
+      targetPort: 8080

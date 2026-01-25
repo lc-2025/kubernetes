@@ -12,4 +12,4 @@ spec:
           service:
             name: ping-pong-cluster-ip
             port:
-              number: 5070
+              number: 8080

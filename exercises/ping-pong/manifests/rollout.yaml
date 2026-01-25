@@ -40,7 +40,7 @@ spec:
           readinessProbe:
             httpGet:
               path: /pings
-              port: 5070
+              port: 8080
             initialDelaySeconds: 10
             periodSeconds: 5
             timeoutSeconds: 3
@@ -48,7 +48,7 @@ spec:
           livenessProbe:
             httpGet:
               path: /pings
-              port: 5070
+              port: 8080
             initialDelaySeconds: 20
             periodSeconds: 10
             timeoutSeconds: 6
@@ -67,8 +67,8 @@ spec:
   selector:
     app: ping-pong-app
   ports:
-    - port: 5070
-      targetPort: 5070
+    - port: 8080
+      targetPort: 8080
 ---
 # Canary service
 apiVersion: v1
@@ -79,5 +79,5 @@ spec:
   selector:
     app: ping-pong-app
   ports:
-    - port: 5070
-      targetPort: 5070
+    - port: 8080
+      targetPort: 50808070
